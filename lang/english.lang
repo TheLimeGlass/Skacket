@@ -1,0 +1,14 @@
+version: @version@
+
+#@an makes the pattern allow for `an`.
+
+types:
+	movement: steer movement
+
+movement:
+	left: left, a
+	right: right, d
+	forwards: forwards, up, w
+	backwards: backwards, down, s
+	jump: jump, space
+	unmount: unmount, dismount, shift
