@@ -11,11 +11,13 @@ import com.comphenix.protocol.ProtocolManager;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
+import me.limeglass.skacket.managers.SignManager;
 
 public final class Skacket extends JavaPlugin {
 
 	private ProtocolManager protocolManager;
 	private static Skacket instance;
+	private SignManager signManager;
 	private SkriptAddon addon;
 	private Metrics metrics;
 
@@ -32,6 +34,7 @@ public final class Skacket extends JavaPlugin {
 		saveDefaultConfig();
 		metrics = new Metrics(this);
 		protocolManager = ProtocolLibrary.getProtocolManager();
+		signManager = new SignManager(this);
 		try {
 			addon = Skript.registerAddon(this)
 					.loadClasses("me.limeglass.skacket", "elements", "listeners")
@@ -48,6 +51,10 @@ public final class Skacket extends JavaPlugin {
 
 	public SkriptAddon getAddonInstance() {
 		return addon;
+	}
+
+	public SignManager getSignManager() {
+		return signManager;
 	}
 
 	public static Skacket getInstance() {
