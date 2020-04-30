@@ -1,1 +1,3 @@
-# Skacket v1.0.0
+# Skacket
+
+An addon dedicated to hacking things and maintained packet syntaxes.
