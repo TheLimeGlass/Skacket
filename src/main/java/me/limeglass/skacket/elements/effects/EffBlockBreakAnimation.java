@@ -1,29 +1,23 @@
 package me.limeglass.skacket.elements.effects;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.inventory.ItemStack;
 import org.eclipse.jdt.annotation.Nullable;
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.EnumWrappers.ItemSlot;
+import com.comphenix.protocol.wrappers.BlockPosition;
 import com.google.common.collect.Sets;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.aliases.ItemType;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
-import me.limeglass.skacket.Skacket;
+import me.limeglass.skacket.wrappers.WrapperPlayServerBlockBreakAnimation;
 
 public class EffBlockBreakAnimation extends Effect {
 
@@ -34,57 +28,52 @@ public class EffBlockBreakAnimation extends Effect {
 				"show stacking block break [animation] stage %number% at %locations% [for %-players%]");
 	}
 
-	private Expression<LivingEntity> entities;
+	private Expression<Location> locations;
 
 	@Nullable
 	private Expression<Player> players;
 
-	private Expression<ItemType> item;
-
-	private Expression<ItemSlot> slot;
+	private Expression<Number> stage;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parseResult) {
-		entities = (Expression<LivingEntity>) exprs[0];
-		item = (Expression<ItemType>) exprs[1];
-		players = (Expression<Player>) exprs[2];
-		players = (Expression<Player>) exprs[3];
+		if (matchedPattern == 0) {
+			players = (Expression<Player>) exprs[0];
+			locations = (Expression<Location>) exprs[1];
+			stage = (Expression<Number>) exprs[2];
+		} else {
+			stage = (Expression<Number>) exprs[0];
+			locations = (Expression<Location>) exprs[1];
+			players = (Expression<Player>) exprs[2];
+		}
 		return true;
 	}
 
 	@Override
 	protected void execute(Event event) {
-		Set<Player> send = new HashSet<>();
+		Set<Player> receivers = new HashSet<>();
 		if (players == null)
-			send.addAll(Bukkit.getOnlinePlayers());
+			receivers.addAll(Bukkit.getOnlinePlayers());
 		else
-			send.addAll(Sets.newHashSet(players.getArray(event)));
-		ItemSlot slot = this.slot.getSingle(event);
-		for (LivingEntity entity : entities.getArray(event)) {
-			setArmour(entity, slot, item.getSingle(event).getRandom(), send.toArray(new Player[send.size()]));
+			receivers.addAll(Sets.newHashSet(players.getArray(event)));
+		int stage = this.stage.getSingle(event).intValue();
+		for (Location location : locations.getArray(event)) {
+			for (Player receiver : receivers) {
+				WrapperPlayServerBlockBreakAnimation packet = new WrapperPlayServerBlockBreakAnimation();
+				packet.setLocation(new BlockPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ()));
+				packet.setEntityID(receiver.getEntityId());
+				packet.setDestroyStage(stage);
+				packet.sendPacket(receiver);
+			}
 		}
 	}
 
 	@Override
 	public String toString(@Nullable Event event, boolean debug) {
 		if (event == null)
-			return "client side armour";
-		return "client side armour to " + entities.toString(event, debug) + " armour " + item.toString(event, debug);
-	}
-
-	private static void setArmour(LivingEntity entity, ItemSlot slot, ItemStack item, Player... players) {
-		ProtocolManager protocolManager = Skacket.getInstance().getProtocolManager();
-		PacketContainer packet = protocolManager.createPacket(PacketType.Play.Server.ENTITY_EQUIPMENT);
-		packet.getIntegers().write(0, entity.getEntityId());
-		packet.getItemSlots().write(0, slot);
-		packet.getItemModifier().write(0, item);
-		for (Player player : players)
-			try {
-				protocolManager.sendServerPacket(player, packet);
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
+			return "block break animation";
+		return "block break animation to " + players.toString(event, debug) + " at stage " + stage.toString(event, debug) + " at " + locations.toString(event, debug);
 	}
 
 }
