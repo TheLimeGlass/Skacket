@@ -18,7 +18,7 @@ import me.limeglass.skacket.sections.LazySection;
 public class SecOpenSign extends LazySection {
 
 	static {
-		Skript.registerCondition(SecOpenSign.class, "open sign [gui] to %players% [with (text|lines) %-strings%]");
+		Skript.registerCondition(SecOpenSign.class, "open sign [gui] to %players% [with [(text|lines)] %-strings%]");
 	}
 
 	private Expression<Player> players;

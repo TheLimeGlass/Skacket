@@ -1,9 +1,8 @@
 # The version is to help determine which version this config is. Please don't modify this value.
-configuration-version: 2
+configuration-version: 1
 
 # Print additional information in the console. Useful for figuring out errors and issues.
 debug: false
 
-# If the sign gui system should call the `on sign change` event.
-# This will make all the client side sign gui's allowed to be accessed through this event.
-signgui-call-change-event: false
+# The port that is in the SimpleSkungee configuration on the Proxy.
+port: 8000
