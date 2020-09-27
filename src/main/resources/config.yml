@@ -3,6 +3,3 @@ configuration-version: 1
 
 # Print additional information in the console. Useful for figuring out errors and issues.
 debug: false
-
-# The port that is in the SimpleSkungee configuration on the Proxy.
-port: 8000

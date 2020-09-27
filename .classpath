@@ -1,180 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry output="bin/main" kind="src" path="src/main/java">
+	<classpathentry kind="src" output="bin/main" path="src/main/java">
 		<attributes>
 			<attribute name="gradle_scope" value="main"/>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry output="bin/main" kind="src" path="src/main/resources">
+	<classpathentry kind="src" output="bin/main" path="src/main/resources">
 		<attributes>
 			<attribute name="gradle_scope" value="main"/>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry output="bin/test" kind="src" path="src/test/java">
+	<classpathentry kind="src" output="bin/test" path="src/test/java">
 		<attributes>
 			<attribute name="gradle_scope" value="test"/>
 			<attribute name="gradle_used_by_scope" value="test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry output="bin/test" kind="src" path="src/test/resources">
+	<classpathentry kind="src" output="bin/test" path="src/test/resources">
 		<attributes>
 			<attribute name="gradle_scope" value="test"/>
 			<attribute name="gradle_used_by_scope" value="test"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
 	<classpathentry kind="output" path="bin/default"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.eclipse.jdt/org.eclipse.jdt.annotation/1.1.0/aaab664d7d6c398ba78864495fbaefd32c68e401/org.eclipse.jdt.annotation-1.1.0-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.eclipse.jdt/org.eclipse.jdt.annotation/1.1.0/c154cecefedc3a8f2a2752db856d8a251ecb49c9/org.eclipse.jdt.annotation-1.1.0.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.spigotmc/spigot-api/1.15.2-R0.1-SNAPSHOT/7fd9eb439bca7ef8357fa15c1d33a16814952dca/spigot-api-1.15.2-R0.1-SNAPSHOT-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.spigotmc/spigot-api/1.15.2-R0.1-SNAPSHOT/fe462b82994ce52c22f132d078f8e0a2a3b374eb/spigot-api-1.15.2-R0.1-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.SkriptLang/Skript/2.4.1/33707936a3387670020ae0a7af9bfb63433cc03/Skript-2.4.1-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.SkriptLang/Skript/2.4.1/3d5418be937782dfcbadd3dbff6dd55098c99b5e/Skript-2.4.1.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.comphenix.protocol/ProtocolLib/4.4.0/895951e4cad84d9417d686224f17170af47d8c91/ProtocolLib-4.4.0.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD/AnvilGUI/master-SNAPSHOT/12dbc517d9fcc0f8e0e0ff1f1c398511b4c07a91/AnvilGUI-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.json/json/20180813/60753006d96d5fc85b61b0897f3326b5c4e1c4f0/json-20180813-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.json/json/20180813/8566b2b0391d9d4479ea225645c6ed47ef17fe41/json-20180813.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/commons-lang/commons-lang/2.6/67313d715fbf0ea4fd0bdb69217fb77f807a8ce5/commons-lang-2.6-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/commons-lang/commons-lang/2.6/ce1edb914c94ebc388f086c6827e8bdeec71ac2/commons-lang-2.6.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/net.md-5/bungeecord-chat/1.15-SNAPSHOT/1aab3aab7cde500593a2eb238f27d7b3eb1f5eb1/bungeecord-chat-1.15-SNAPSHOT-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/net.md-5/bungeecord-chat/1.15-SNAPSHOT/86e5fcaedf27b6aa086d4ee4267c42018c639fca/bungeecord-chat-1.15-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/21.0/b9ed26b8c23fe7cd3e6b463b34e54e5c6d9536d5/guava-21.0-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/21.0/3a3d111be1be1b745edfa7d91678a12d7ed38709/guava-21.0.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.0/baf95d8519fc1a11d388f8543cb40cd2bb9d66dc/gson-2.8.0-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.0/c4ba5371a29ac9b2ad6129b1d39ea38750043eff/gson-2.8.0.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.yaml/snakeyaml/1.25/45379604b7a254120101009ba09537737daed6f/snakeyaml-1.25-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.yaml/snakeyaml/1.25/8b6e01ef661d8378ae6dd7b511a7f2a33fae1421/snakeyaml-1.25.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.comphenix.protocol/ProtocolLib-API/4.4.0/9860054c299bf94430d51da88eb062bab6899c13/ProtocolLib-API-4.4.0.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/cglib/cglib-nodep/3.2.5/e479ea0d2ee107b57c83450df3273c453b918bbd/cglib-nodep-3.2.5-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/cglib/cglib-nodep/3.2.5/d7a6a551766f1916a940c7fe2a16fd6473d72684/cglib-nodep-3.2.5.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.comphenix.executors/BukkitExecutors/1.1-SNAPSHOT/b211d5c12d920bb4243f2b30f9a8769b92595393/BukkitExecutors-1.1-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui/master-SNAPSHOT/796df3cb1e7cf0e25c29fe7f499d91baf4ea4aac/anvilgui-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_10_R1/master-SNAPSHOT/a492341370b64600f77aacee9185e12e1ba6b7d2/anvilgui-1_10_R1-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_11_R1/master-SNAPSHOT/b71e2fd2455bed14790c8543235ab81079934b/anvilgui-1_11_R1-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_12_R1/master-SNAPSHOT/216cf8688cb79faba95c8ded59968690de239425/anvilgui-1_12_R1-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_13_R1/master-SNAPSHOT/c71a598da6a015a58d3e6b20cc7cd577bb38562a/anvilgui-1_13_R1-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_13_R2/master-SNAPSHOT/ec3c3a38430bd256e874e780948e06a9fb78551c/anvilgui-1_13_R2-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_14_4_R1/master-SNAPSHOT/932d7ae31024a30009020ae6f49efeb80e843ae3/anvilgui-1_14_4_R1-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_14_R1/master-SNAPSHOT/ea0a6ae65528b265fc7e2dbe5aa9f910bcbdb3a3/anvilgui-1_14_R1-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_15_R1/master-SNAPSHOT/daccc83e9ba6dfe568840ff169aabbefcc10ba6f/anvilgui-1_15_R1-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_7_R4/master-SNAPSHOT/d63e79357327f9687126200698273327ce77d4e3/anvilgui-1_7_R4-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_8_R1/master-SNAPSHOT/3dc813a057a555615737d156a52ff754924d70a7/anvilgui-1_8_R1-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_8_R2/master-SNAPSHOT/f6be8350c37f1245e5885a323c3a69454721bc86/anvilgui-1_8_R2-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_8_R3/master-SNAPSHOT/e84d61b9216c80b8b987dd7e272b492e292ae567/anvilgui-1_8_R3-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_9_R1/master-SNAPSHOT/3655823a74c8cae4f3b5e6f2d3b3c14aee53e008/anvilgui-1_9_R1-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-1_9_R2/master-SNAPSHOT/2404c8a30b1e0e9eb0d9d956d8d17d73632a8897/anvilgui-1_9_R2-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.WesJD.AnvilGUI/anvilgui-abstraction/master-SNAPSHOT/290e3a957b16f8ff0df63b4ee5c3d74781c754fb/anvilgui-abstraction-master-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value=""/>
-		</attributes>
-	</classpathentry>
 </classpath>

@@ -7,7 +7,7 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
-import me.limeglass.skacket.sections.LazySection;
+import me.limeglass.skacket.sections.OptionalSection;
 
 public class EffEndSection extends Effect {
 
@@ -25,7 +25,7 @@ public class EffEndSection extends Effect {
 
 	@Override
 	public boolean init(Expression<?>[] expressions, int matchedPattern, Kleenean isDelayed, ParseResult parseResult) {
-		LazySection.removeCurrentSection();
+		OptionalSection.removeCurrentSection();
 		return true;
 	}
 

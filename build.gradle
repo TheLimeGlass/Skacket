@@ -1,0 +1,82 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+	id 'com.github.johnrengelman.shadow' version '5.2.0'
+	id 'maven-publish'
+	id 'eclipse'
+	id 'java'
+}
+
+repositories {
+	mavenCentral()
+	jcenter()
+
+	//Spigot
+	maven {
+		url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+	}
+
+	// Bungeecord
+	maven {
+		url "https://oss.sonatype.org/content/repositories/snapshots/"
+	}
+
+	// ProtocolLib
+	maven {
+		url "http://repo.dmulloy2.net/nexus/repository/public"
+	}
+
+	//Jitpack for Skript
+	maven {
+		url 'https://jitpack.io'
+	}
+
+}
+
+dependencies {
+
+	//Nullable annotation
+	implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '1.1.0')
+
+	//Spigot/Bukkit
+	implementation (group: 'org.spigotmc', name: 'spigot-api', version: '1.15.2-R0.1-SNAPSHOT')
+
+	//Skript
+	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.4.1') {
+		transitive = false
+	}
+
+	// ProtocolLib
+	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.6.0-SNAPSHOT");
+
+	// AnvilGUI
+	shadow (group: 'com.github.WesJD', name: 'AnvilGUI', version: 'master-SNAPSHOT')
+
+	shadow (group: 'org.json', name: 'json', version: '20180813')
+
+}
+
+processResources {
+	filter ReplaceTokens, tokens: ["version": project.property("version")]
+	from ('lang') {
+        include '**/*'
+        into 'lang/'
+    }
+	from (sourceSets.main.resources.srcDirs) {
+		include '**/*.yml'
+	}
+}
+
+shadowJar {
+	configurations = [project.configurations.shadow]
+	archiveVersion = version
+	baseName = project.name
+	classifier = ''
+	relocate 'net.wesjd.anvilgui', 'me.limeglass.skacket.anvilgui'
+	minimize()
+	dependencies {
+		exclude(dependency('org.spigotmc:'))
+		exclude(dependency('org.yaml:'))
+		exclude(dependency('io.netty:'))
+	}
+}

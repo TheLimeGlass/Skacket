@@ -1,6 +1,5 @@
 package me.limeglass.skacket.listeners;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,13 +16,10 @@ import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.BlockPosition;
 
 import me.limeglass.skacket.Skacket;
-import me.limeglass.skacket.events.ServerSignChangeEvent;
 import me.limeglass.skacket.events.SteerVehicleEvent;
 import me.limeglass.skacket.events.SteerVehicleEvent.Movement;
 import me.limeglass.skacket.wrappers.WrapperPlayClientUpdateSign;
-import me.limeglass.skacket.wrappers.WrapperPlayServerUpdateSign;
 
-@SuppressWarnings("deprecation")
 public class PacketListeners {
 
 	static {
@@ -53,27 +49,26 @@ public class PacketListeners {
 					event.setCancelled(true);
 			}
 		});
-		// Deprecation fix in WrapperPlayServerUpdateSign when removed.
-		instance.getProtocolManager().addPacketListener(new PacketAdapter(instance, PacketType.Play.Server.UPDATE_SIGN) {
-			@Override
-			public void onPacketReceiving(PacketEvent event) {
-				WrapperPlayServerUpdateSign packet = new WrapperPlayServerUpdateSign(event.getPacket());
-				String[] lines = Arrays.stream(packet.getLines())
-						.map(component -> component.toString())
-						.toArray(String[]::new);
-				Player player = event.getPlayer();
-				BlockPosition position = packet.getLocation();
-				if (position == null)
-					return;
-				Location location = position.toLocation(player.getWorld());
-				ServerSignChangeEvent signEvent = new ServerSignChangeEvent(location.getBlock(), event.getPlayer(), lines);
-				Bukkit.getPluginManager().callEvent(signEvent);
-				if (event.isCancelled()) {
-					event.setCancelled(true);
-					return;
-				}
-			}
-		});
+//		instance.getProtocolManager().addPacketListener(new PacketAdapter(instance, PacketType.Play.Server.UPDATE_SIGN) {
+//			@Override
+//			public void onPacketReceiving(PacketEvent event) {
+//				WrapperPlayServerUpdateSign packet = new WrapperPlayServerUpdateSign(event.getPacket());
+//				String[] lines = Arrays.stream(packet.getLines())
+//						.map(component -> component.toString())
+//						.toArray(String[]::new);
+//				Player player = event.getPlayer();
+//				BlockPosition position = packet.getLocation();
+//				if (position == null)
+//					return;
+//				Location location = position.toLocation(player.getWorld());
+//				ServerSignChangeEvent signEvent = new ServerSignChangeEvent(location.getBlock(), event.getPlayer(), lines);
+//				Bukkit.getPluginManager().callEvent(signEvent);
+//				if (event.isCancelled()) {
+//					event.setCancelled(true);
+//					return;
+//				}
+//			}
+//		});
 		instance.getProtocolManager().addPacketListener(new PacketAdapter(instance, PacketType.Play.Client.UPDATE_SIGN) {
 			@Override
 			public void onPacketReceiving(PacketEvent event) {

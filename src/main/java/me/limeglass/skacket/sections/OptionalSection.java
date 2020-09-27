@@ -7,11 +7,11 @@ import ch.njol.skript.config.SectionNode;
 import ch.njol.skript.config.SimpleNode;
 import ch.njol.skript.log.SkriptLogger;
 
-public abstract class LazySection extends Section {
+public abstract class OptionalSection extends Section {
 
-	public static LazySection lastInstance;
+	public static OptionalSection lastInstance;
 
-	public LazySection() {
+	public OptionalSection() {
 		Node current = SkriptLogger.getNode();
 		if (current != null && current instanceof SectionNode) {
 			section = (SectionNode) current;

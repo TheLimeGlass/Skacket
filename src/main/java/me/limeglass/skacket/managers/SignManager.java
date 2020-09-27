@@ -21,12 +21,10 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.util.Consumer;
 
 import com.comphenix.protocol.wrappers.BlockPosition;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import me.limeglass.skacket.Skacket;
 import me.limeglass.skacket.wrappers.WrapperPlayServerOpenSignEntity;
-import me.limeglass.skacket.wrappers.WrapperPlayServerUpdateSign;
 
 public class SignManager implements Listener {
 
@@ -59,14 +57,8 @@ public class SignManager implements Listener {
 			location.setY(255);
 			sign.setPreviousBlockData(player, location.getBlock().getBlockData());
 			player.sendBlockChange(location, materialAttempt("SIGN_POST", "OAK_SIGN").createBlockData());
-
-			if (text != null && text.length <= 4 && text.length > 0) {
-				WrapperPlayServerUpdateSign updateSignPacket = new WrapperPlayServerUpdateSign();
-				updateSignPacket.setLocation(new BlockPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ()));
-				updateSignPacket.setLines(Lists.newArrayList(text));
-				updateSignPacket.sendPacket(player);
-			}
-
+			if (text != null && text.length <= 4 && text.length > 0)
+				player.sendSignChange(location, text);
 	        WrapperPlayServerOpenSignEntity packet = new WrapperPlayServerOpenSignEntity();
 	        packet.setLocation(new BlockPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ()));
 	        packet.sendPacket(player);

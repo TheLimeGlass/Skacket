@@ -15,9 +15,9 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
 import me.limeglass.skacket.objects.AnvilMenu;
-import me.limeglass.skacket.sections.LazySection;
+import me.limeglass.skacket.sections.OptionalSection;
 
-public class SecOpenAnvil extends LazySection {
+public class SecOpenAnvil extends OptionalSection {
 
 	static {
 		Skript.registerCondition(SecOpenAnvil.class, "open [an] anvil [gui] (named|with title) %string% to %players% with [items] %itemtypes%");

@@ -13,9 +13,9 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
 import me.limeglass.skacket.Skacket;
-import me.limeglass.skacket.sections.LazySection;
+import me.limeglass.skacket.sections.OptionalSection;
 
-public class SecOpenSign extends LazySection {
+public class SecOpenSign extends OptionalSection {
 
 	static {
 		Skript.registerCondition(SecOpenSign.class, "open sign [gui] to %players% [with [(text|lines)] %-strings%]");
