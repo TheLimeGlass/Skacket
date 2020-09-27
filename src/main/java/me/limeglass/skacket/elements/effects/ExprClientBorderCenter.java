@@ -5,6 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
+import com.comphenix.protocol.wrappers.EnumWrappers.WorldBorderAction;
+
 import ch.njol.skript.classes.Changer.ChangeMode;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.util.coll.CollectionUtils;
@@ -25,6 +27,7 @@ public class ExprClientBorderCenter extends SimplePropertyExpression<Player, Loc
 	@Nullable
 	public Location convert(Player player) {
 		WrapperPlayServerWorldBorder packet = new WrapperPlayServerWorldBorder();
+		packet.setAction(WorldBorderAction.SET_CENTER);
 		packet.receivePacket(player);
 		return new Location(player.getWorld(), packet.getCenterX(), 0, packet.getCenterZ());
 	}
@@ -46,6 +49,7 @@ public class ExprClientBorderCenter extends SimplePropertyExpression<Player, Loc
 			return;
 		Location location = (Location) delta[0];
 		WrapperPlayServerWorldBorder packet = new WrapperPlayServerWorldBorder();
+		packet.setAction(WorldBorderAction.SET_CENTER);
 		packet.setCenterX(location.getX());
 		packet.setCenterZ(location.getZ());
 		for (Player player : players)

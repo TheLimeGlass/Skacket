@@ -66,6 +66,20 @@ public class EffArmourChange extends Effect {
 	}
 
 	private static void setArmour(LivingEntity entity, ItemSlot slot, ItemStack item, Player... players) {
+		/*1.16 support when ProtocolLib gets updated.
+		 * 
+		if (MinecraftVersion.atOrAbove(MinecraftVersion.BEE_UPDATE)) {
+			PacketContainer container = new PacketContainer(PacketType.Play.Server.ENTITY_EQUIPMENT);
+			// Write the entity ID too.
+
+			List<Pair<EnumWrappers.ItemSlot, ItemStack>> data = new ArrayList<>();
+			// Example addition, please change this syntax to support multiple ItemSlots in future.
+			data.add(new Pair<>(EnumWrappers.ItemSlot.CHEST, new ItemStack(Material.NETHERITE_CHESTPLATE)));
+			data.add(new Pair<>(EnumWrappers.ItemSlot.LEGS, new ItemStack(Material.GOLDEN_LEGGINGS)));
+
+			container.getSlotStackPairLists().write(0, data);
+			return;
+		}*/
 		WrapperPlayServerEntityEquipment packet = new WrapperPlayServerEntityEquipment();
 		packet.setEntityID(entity.getEntityId());
 		packet.setSlot(slot);

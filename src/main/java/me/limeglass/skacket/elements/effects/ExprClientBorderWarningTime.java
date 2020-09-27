@@ -26,6 +26,7 @@ public class ExprClientBorderWarningTime extends SimplePropertyExpression<Player
 	@Override
 	public Timespan convert(Player player) {
 		WrapperPlayServerWorldBorder packet = new WrapperPlayServerWorldBorder();
+		packet.setAction(WorldBorderAction.SET_WARNING_TIME);
 		packet.receivePacket(player);
 		return new Timespan((packet.getWarningTime() * 1000));
 	}
