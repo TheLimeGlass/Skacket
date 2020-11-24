@@ -10,7 +10,7 @@ import me.limeglass.skacket.objects.ClientWorldBorder;
 public class ExprClientBorderRadius extends SimplePropertyExpression<ClientWorldBorder, Number> {
 
 	static {
-		register(ExprClientBorderRadius.class, Number.class, "client [side] [world] radius", "clientworldborders");
+		register(ExprClientBorderRadius.class, Number.class, "client [side] [world] border radius", "clientworldborders");
 	}
 
 	@Override

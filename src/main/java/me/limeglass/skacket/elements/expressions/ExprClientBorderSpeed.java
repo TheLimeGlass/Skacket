@@ -10,7 +10,7 @@ import me.limeglass.skacket.objects.ClientWorldBorder;
 public class ExprClientBorderSpeed extends SimplePropertyExpression<ClientWorldBorder, Number> {
 
 	static {
-		register(ExprClientBorderSpeed.class, Number.class, "client [side] [world] speed", "clientworldborders");
+		register(ExprClientBorderSpeed.class, Number.class, "client [side] [world] border speed", "clientworldborders");
 	}
 
 	@Override
