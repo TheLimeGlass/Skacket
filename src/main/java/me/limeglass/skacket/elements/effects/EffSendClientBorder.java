@@ -23,7 +23,7 @@ public class EffSendClientBorder extends Effect {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parseResult) {
-		players = (Expression<Player>) exprs[0 ^ matchedPattern];
+		players = (Expression<Player>) exprs[1 - matchedPattern];
 		border = (Expression<ClientWorldBorder>) exprs[matchedPattern];
 		return true;
 	}
