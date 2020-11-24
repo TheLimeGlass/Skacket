@@ -16,7 +16,7 @@ import me.limeglass.skacket.objects.ClientWorldBorder;
 public class ExprClientWorldBorder extends SimpleExpression<ClientWorldBorder> {
 
 	static {
-		Skript.registerExpression(ExprClientWorldBorder.class, ClientWorldBorder.class, ExpressionType.SIMPLE, "new client [side] [world] border (with|for) %worlds%");
+		Skript.registerExpression(ExprClientWorldBorder.class, ClientWorldBorder.class, ExpressionType.SIMPLE, "[a] new client [side] [world] border (with|for) %worlds%");
 	}
 
 	private Expression<World> worlds;
