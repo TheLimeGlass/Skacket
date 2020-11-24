@@ -1,10 +1,12 @@
 package me.limeglass.skacket.listeners;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.SignChangeEvent;
 
@@ -25,6 +27,8 @@ public class PacketListeners {
 	static {
 		Skacket instance = Skacket.getInstance();
 		instance.getProtocolManager().addPacketListener(new PacketAdapter(instance, PacketType.Play.Client.STEER_VEHICLE) {
+			@Override
+			public void onPacketSending(PacketEvent event) {}
 			@Override
 			public void onPacketReceiving(PacketEvent event) {
 				PacketContainer packet = event.getPacket();
@@ -49,27 +53,9 @@ public class PacketListeners {
 					event.setCancelled(true);
 			}
 		});
-//		instance.getProtocolManager().addPacketListener(new PacketAdapter(instance, PacketType.Play.Server.UPDATE_SIGN) {
-//			@Override
-//			public void onPacketReceiving(PacketEvent event) {
-//				WrapperPlayServerUpdateSign packet = new WrapperPlayServerUpdateSign(event.getPacket());
-//				String[] lines = Arrays.stream(packet.getLines())
-//						.map(component -> component.toString())
-//						.toArray(String[]::new);
-//				Player player = event.getPlayer();
-//				BlockPosition position = packet.getLocation();
-//				if (position == null)
-//					return;
-//				Location location = position.toLocation(player.getWorld());
-//				ServerSignChangeEvent signEvent = new ServerSignChangeEvent(location.getBlock(), event.getPlayer(), lines);
-//				Bukkit.getPluginManager().callEvent(signEvent);
-//				if (event.isCancelled()) {
-//					event.setCancelled(true);
-//					return;
-//				}
-//			}
-//		});
 		instance.getProtocolManager().addPacketListener(new PacketAdapter(instance, PacketType.Play.Client.UPDATE_SIGN) {
+			@Override
+			public void onPacketSending(PacketEvent event) {}
 			@Override
 			public void onPacketReceiving(PacketEvent event) {
 				WrapperPlayClientUpdateSign packet = new WrapperPlayClientUpdateSign(event.getPacket());
@@ -89,6 +75,13 @@ public class PacketListeners {
 								return;
 							}
 						}
+						sign.getPreviousBlockDataOld(player).ifPresent(material -> {
+							try {
+								Player.class.getMethod("sendBlockChange", Location.class, Material.class, byte.class).invoke(player, location, material, 0);
+							} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+								e.printStackTrace();
+							}
+						});
 						sign.getPreviousBlockData(player).ifPresent(blockData -> player.sendBlockChange(location, blockData));
 						sign.accept(signEvent);
 					});

@@ -11,6 +11,7 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -23,11 +24,13 @@ import org.bukkit.util.Consumer;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import com.google.common.collect.Sets;
 
+import ch.njol.skript.Skript;
 import me.limeglass.skacket.Skacket;
 import me.limeglass.skacket.wrappers.WrapperPlayServerOpenSignEntity;
 
 public class SignManager implements Listener {
 
+	private final static boolean oldAF = !Skript.methodExists(Block.class, "getBlockData");
 	private final Set<SignEditor> signs = new HashSet<>();
 
 	public SignManager(Skacket instance) {
@@ -55,7 +58,10 @@ public class SignManager implements Listener {
 		for (Player player : players) {
 			Location location = player.getLocation();
 			location.setY(255);
-			sign.setPreviousBlockData(player, location.getBlock().getBlockData());
+			if (oldAF) {
+				sign.setPreviousBlockDataOld(player, location.getBlock().getType());
+			} else
+				sign.setPreviousBlockData(player, location.getBlock().getBlockData());
 			player.sendBlockChange(location, materialAttempt("SIGN_POST", "OAK_SIGN").createBlockData());
 			if (text != null && text.length <= 4 && text.length > 0)
 				player.sendSignChange(location, text);
@@ -96,6 +102,7 @@ public class SignManager implements Listener {
 	public class SignEditor {
 
 		private Map<Player, BlockData> previousBlockData = new HashMap<>();
+		private Map<Player, Material> oldShit = new HashMap<>();
 		private final Set<Player> players = new HashSet<>();
 		private Consumer<SignChangeEvent> consumer;
 		private final String[] lines;
@@ -116,8 +123,16 @@ public class SignManager implements Listener {
 			previousBlockData.put(player, data);
 		}
 
+		public void setPreviousBlockDataOld(Player player, Material data) {
+			oldShit.put(player, data);
+		}
+
 		public Optional<BlockData> getPreviousBlockData(Player player) {
 			return Optional.ofNullable(previousBlockData.get(player));
+		}
+
+		public Optional<Material> getPreviousBlockDataOld(Player player) {
+			return Optional.ofNullable(oldShit.get(player));
 		}
 
 		public void accept(SignChangeEvent event) {

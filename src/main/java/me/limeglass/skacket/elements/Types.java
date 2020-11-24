@@ -14,6 +14,7 @@ import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
 import me.limeglass.skacket.events.SteerVehicleEvent.Movement;
+import me.limeglass.skacket.objects.ClientWorldBorder;
 
 public class Types {
 
@@ -91,6 +92,33 @@ public class Types {
 
 				})
 				.serializer(new EnumSerializer<>(ItemSlot.class)));
+		Classes.registerClass(new ClassInfo<>(ClientWorldBorder.class, "clientworldborder")
+				.user("clientworldborders?")
+				.name("Client World Border")
+				.defaultExpression(new EventValueExpression<>(ClientWorldBorder.class))
+				.parser(new Parser<ClientWorldBorder>() {
+
+					@Override
+					public boolean canParse(ParseContext context) {
+						return false;
+					}
+
+					@Override
+					public String toString(ClientWorldBorder border, int flags) {
+						return border.getWorld().getName();
+					}
+
+					@Override
+					public String toVariableNameString(ClientWorldBorder border) {
+						return border.getWorld().getName().toLowerCase(Locale.ENGLISH);
+					}
+
+					@Override
+					public String getVariableNamePattern() {
+						return "\\S+";
+					}
+
+				}));
 	}
 
 }
