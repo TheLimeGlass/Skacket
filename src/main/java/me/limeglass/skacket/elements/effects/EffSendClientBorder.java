@@ -33,7 +33,10 @@ public class EffSendClientBorder extends Effect {
 		if (players == null || border == null)
 			return;
 		Player[] players = this.players.getArray(event);
-		border.getSingle(event).send(players);
+		ClientWorldBorder border = this.border.getSingle(event);
+		if (border == null || players == null)
+			return;
+		border.send(players);
 	}
 
 	@Override

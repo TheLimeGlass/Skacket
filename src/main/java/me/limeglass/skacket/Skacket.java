@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import com.sitrica.glowing.GlowingAPI;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
@@ -16,6 +17,7 @@ import me.limeglass.skacket.managers.SignManager;
 public final class Skacket extends JavaPlugin {
 
 	private ProtocolManager protocolManager;
+	private static GlowingAPI glowing;
 	private static Skacket instance;
 	private SignManager signManager;
 	private SkriptAddon addon;
@@ -24,6 +26,7 @@ public final class Skacket extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		instance = this;
+		glowing = new GlowingAPI(this);
 		File configFile = new File(getDataFolder(), "config.yml");
 		//If newer version was found, update configuration.
 		int version = 1;
@@ -59,6 +62,10 @@ public final class Skacket extends JavaPlugin {
 
 	public static Skacket getInstance() {
 		return instance;
+	}
+
+	public GlowingAPI getGlowingAPI() {
+		return glowing;
 	}
 
 	public Metrics getMetrics() {

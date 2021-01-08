@@ -26,6 +26,14 @@ repositories {
 		url "http://repo.dmulloy2.net/nexus/repository/public"
 	}
 
+	maven {
+		url 'https://maven.pkg.github.com/Sitrica/GlowingAPI/'
+		credentials {
+			username = "Sitrica"
+			password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_PACKAGES_KEY")
+		}
+	}
+
 	//Jitpack for Skript
 	maven {
 		url 'https://jitpack.io'
@@ -48,6 +56,8 @@ dependencies {
 
 	// ProtocolLib
 	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.6.0-SNAPSHOT");
+
+	shadow (group: 'com.sitrica', name: 'GlowingAPI', version: '1.0.0')
 
 	// AnvilGUI
 	shadow (group: 'com.github.WesJD', name: 'AnvilGUI', version: 'master-SNAPSHOT')
