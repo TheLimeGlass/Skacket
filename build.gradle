@@ -62,7 +62,7 @@ dependencies {
 	// AnvilGUI
 	shadow (group: 'com.github.WesJD', name: 'AnvilGUI', version: 'master-SNAPSHOT')
 
-	shadow (group: 'org.json', name: 'json', version: '20201115')
+	shadow (group: 'org.json', name: 'json', version: '20210307')
 
 }
 
