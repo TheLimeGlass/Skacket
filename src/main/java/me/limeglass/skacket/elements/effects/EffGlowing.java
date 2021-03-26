@@ -24,7 +24,7 @@ import me.limeglass.skacket.Skacket;
 public class EffGlowing extends Effect {
 
 	static {
-		Skript.registerEffect(EffGlowing.class, "set glowing of %livingentities% to %boolean% [(for|to) %-players%] [(for|to) %-timespan%]");
+		Skript.registerEffect(EffGlowing.class, "set client glowing of %livingentities% to %boolean% [(for|to) %-players%] [(for|to) %-timespan%]");
 	}
 
 	private Expression<LivingEntity> entities;

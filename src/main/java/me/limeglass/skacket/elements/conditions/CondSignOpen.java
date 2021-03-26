@@ -2,9 +2,9 @@ package me.limeglass.skacket.elements.conditions;
 
 import org.bukkit.entity.Player;
 
-import ch.njol.skript.conditions.base.PropertyCondition;
 import me.limeglass.skacket.Skacket;
 import me.limeglass.skacket.managers.SignManager;
+import me.limeglass.skacket.utils.PropertyCondition;
 
 public class CondSignOpen extends PropertyCondition<Player> {
 

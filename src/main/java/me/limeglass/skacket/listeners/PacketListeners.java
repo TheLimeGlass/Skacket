@@ -7,6 +7,7 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.SignChangeEvent;
 
@@ -18,17 +19,45 @@ import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.BlockPosition;
 
 import me.limeglass.skacket.Skacket;
+import me.limeglass.skacket.events.NamedSoundEvent;
 import me.limeglass.skacket.events.SteerVehicleEvent;
 import me.limeglass.skacket.events.SteerVehicleEvent.Movement;
 import me.limeglass.skacket.wrappers.WrapperPlayClientUpdateSign;
+import me.limeglass.skacket.wrappers.WrapperPlayServerNamedSoundEffect;
 
 public class PacketListeners {
 
 	static {
 		Skacket instance = Skacket.getInstance();
-		instance.getProtocolManager().addPacketListener(new PacketAdapter(instance, PacketType.Play.Client.STEER_VEHICLE) {
+
+		// NamedSoundEvent
+		instance.getProtocolManager().addPacketListener(new PacketAdapter(instance, PacketType.Play.Server.NAMED_SOUND_EFFECT) {
 			@Override
-			public void onPacketSending(PacketEvent event) {}
+			public void onPacketSending(PacketEvent event) {
+				WrapperPlayServerNamedSoundEffect wrapper = new WrapperPlayServerNamedSoundEffect(event.getPacket());
+				int x = wrapper.getEffectPositionX() / 8;
+				int y = wrapper.getEffectPositionY() / 8;
+				int z = wrapper.getEffectPositionZ() / 8;
+				Player player = event.getPlayer();
+				Location location = new Location(player.getWorld(), x, y, z);
+				SoundCategory category = SoundCategory.MASTER;
+				try {
+					category = SoundCategory.valueOf(wrapper.getSoundCategory().name());
+				} catch (Exception e) {}
+				NamedSoundEvent soundEvent = new NamedSoundEvent(player, wrapper.getSoundEffect(), category, location, wrapper.getVolume(), wrapper.getPitch());
+				Bukkit.getPluginManager().callEvent(soundEvent);
+				if (soundEvent.isCancelled()) {
+					event.setCancelled(true);
+					return;
+				}
+				wrapper.setPitch(soundEvent.getPitch());
+				wrapper.setVolume(soundEvent.getVolume());
+				wrapper.setSoundCategory(com.comphenix.protocol.wrappers.EnumWrappers.SoundCategory.valueOf(soundEvent.getSoundCategory().name()));
+			}
+		});
+
+		// SteerVehicleEvent
+		instance.getProtocolManager().addPacketListener(new PacketAdapter(instance, PacketType.Play.Client.STEER_VEHICLE) {
 			@Override
 			public void onPacketReceiving(PacketEvent event) {
 				PacketContainer packet = event.getPacket();
@@ -53,15 +82,15 @@ public class PacketListeners {
 					event.setCancelled(true);
 			}
 		});
+
+		// ServerSignChangeEvent
 		instance.getProtocolManager().addPacketListener(new PacketAdapter(instance, PacketType.Play.Client.UPDATE_SIGN) {
 			@Override
-			public void onPacketSending(PacketEvent event) {}
-			@Override
 			public void onPacketReceiving(PacketEvent event) {
-				WrapperPlayClientUpdateSign packet = new WrapperPlayClientUpdateSign(event.getPacket());
-				String[] lines = packet.getLines();
+				WrapperPlayClientUpdateSign wrapper = new WrapperPlayClientUpdateSign(event.getPacket());
+				String[] lines = wrapper.getLines();
 				Player player = event.getPlayer();
-				BlockPosition position = packet.getLocation();
+				BlockPosition position = wrapper.getLocation();
 				if (position == null)
 					return;
 				Location location = position.toLocation(player.getWorld());
