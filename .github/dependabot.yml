@@ -1,0 +1,14 @@
+version: 2
+updates:
+- package-ecosystem: gradle
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: com.comphenix.protocol:ProtocolLib
+    versions:
+    - 4.6.0
+  - dependency-name: com.github.johnrengelman.shadow
+    versions:
+    - 6.1.0
