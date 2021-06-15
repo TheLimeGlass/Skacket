@@ -60,7 +60,7 @@ dependencies {
 	}
 
 	// ProtocolLib
-	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.6.1-SNAPSHOT");
+	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.7.0-SNAPSHOT");
 
 	shadow (group: 'com.sitrica', name: 'GlowingAPI', version: '1.0.0')
 
