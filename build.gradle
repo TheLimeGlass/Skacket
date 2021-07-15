@@ -52,17 +52,21 @@ dependencies {
 	implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.600')
 
 	//Spigot/Bukkit
-	implementation (group: 'org.spigotmc', name: 'spigot-api', version: '1.16.4-R0.1-SNAPSHOT')
+	implementation (group: 'org.spigotmc', name: 'spigot-api', version: '1.17-R0.1-SNAPSHOT')
 
 	//Skript
-	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.4.1') {
+	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.6-beta2') {
 		transitive = false
 	}
 
 	// ProtocolLib
-	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.6.1-SNAPSHOT");
+	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.7.0-SNAPSHOT") {
+		transitive = false
+	}
 
-	shadow (group: 'com.sitrica', name: 'GlowingAPI', version: '1.0.0')
+	shadow (group: 'com.sitrica', name: 'GlowingAPI', version: '1.0.0') {
+		transitive = false
+	}
 
 	// AnvilGUI
 	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.5.0-SNAPSHOT')

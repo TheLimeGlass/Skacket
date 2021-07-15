@@ -1,7 +1,5 @@
 package me.limeglass.skacket.elements.events;
 
-import java.util.Locale;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
@@ -59,7 +57,7 @@ public class EvtSteerVehicle extends SkriptEvent {
 
 	@Override
 	public String toString(@Nullable Event event, boolean debug) {
-		return "on steering vehicle" + (movements != null ? " " + movements.toString().toLowerCase(Locale.ENGLISH) : "");
+		return "on steering vehicle" + (movements != null && event != null ? " " + movements.toString(event, debug) : "");
 	}
 
 }

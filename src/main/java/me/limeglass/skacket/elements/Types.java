@@ -5,6 +5,7 @@ import java.util.Locale;
 import org.eclipse.jdt.annotation.Nullable;
 
 import com.comphenix.protocol.wrappers.EnumWrappers.ItemSlot;
+import com.comphenix.protocol.wrappers.EnumWrappers.PlayerDigType;
 
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.EnumSerializer;
@@ -119,6 +120,43 @@ public class Types {
 					}
 
 				}));
+		EnumUtils<PlayerDigType> digs = new EnumUtils<>(PlayerDigType.class, "playerdigtype");
+		Classes.registerClass(new ClassInfo<>(PlayerDigType.class, "playerdigtype")
+				.user("(block)? ?dig ?types?")
+				.name("Player Block Dig Type")
+				.usage(digs.getAllNames())
+				.description("The different types that trigger a player block dig event.")
+				.defaultExpression(new EventValueExpression<>(PlayerDigType.class))
+				.parser(new Parser<PlayerDigType>() {
+
+					@Override
+					@Nullable
+					public PlayerDigType parse(String input, ParseContext context) {
+						return digs.parse(input);
+					}
+
+					@Override
+					public boolean canParse(ParseContext context) {
+						return true;
+					}
+
+					@Override
+					public String toString(PlayerDigType type, int flags) {
+						return digs.toString(type, flags);
+					}
+
+					@Override
+					public String toVariableNameString(PlayerDigType type) {
+						return type.name().toLowerCase(Locale.ENGLISH);
+					}
+
+					@Override
+					public String getVariableNamePattern() {
+						return "\\S+";
+					}
+
+				})
+				.serializer(new EnumSerializer<>(PlayerDigType.class)));
 	}
 
 }

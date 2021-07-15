@@ -17,11 +17,15 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.BlockPosition;
+import com.comphenix.protocol.wrappers.EnumWrappers.Direction;
+import com.comphenix.protocol.wrappers.EnumWrappers.PlayerDigType;
 
 import me.limeglass.skacket.Skacket;
 import me.limeglass.skacket.events.NamedSoundEvent;
+import me.limeglass.skacket.events.PlayerBlockDigEvent;
 import me.limeglass.skacket.events.SteerVehicleEvent;
 import me.limeglass.skacket.events.SteerVehicleEvent.Movement;
+import me.limeglass.skacket.wrappers.WrapperPlayClientBlockDig;
 import me.limeglass.skacket.wrappers.WrapperPlayClientUpdateSign;
 import me.limeglass.skacket.wrappers.WrapperPlayServerNamedSoundEffect;
 
@@ -115,6 +119,25 @@ public class PacketListeners {
 						sign.accept(signEvent);
 					});
 				});
+			}
+		});
+
+		// ClientBlockDig
+		instance.getProtocolManager().addPacketListener(new PacketAdapter(instance, PacketType.Play.Client.BLOCK_DIG) {
+			@Override
+			public void onPacketReceiving(PacketEvent event) {
+				WrapperPlayClientBlockDig wrapper = new WrapperPlayClientBlockDig(event.getPacket());
+				Player player = event.getPlayer();
+				BlockPosition position = wrapper.getLocation();
+				if (position == null)
+					return;
+				Location location = position.toLocation(player.getWorld());
+				Direction direction = wrapper.getDirection();
+				PlayerDigType type = wrapper.getDigType();
+				PlayerBlockDigEvent dig = new PlayerBlockDigEvent(location.getBlock(), player, type, direction);
+				Bukkit.getPluginManager().callEvent(dig);
+				if (dig.isCancelled())
+					event.setCancelled(true);
 			}
 		});
 	}

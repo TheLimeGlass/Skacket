@@ -1,7 +1,5 @@
 package me.limeglass.skacket.elements.events;
 
-import java.util.Locale;
-
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -73,7 +71,7 @@ public class EvtNamedSound extends SkriptEvent {
 
 	@Override
 	public String toString(@Nullable Event event, boolean debug) {
-		return "on sound" + (sounds != null ? " " + sounds.toString().toLowerCase(Locale.ENGLISH) : "");
+		return "on sound" + (sounds != null && event != null ? " " + sounds.toString(event, debug) : "");
 	}
 
 }

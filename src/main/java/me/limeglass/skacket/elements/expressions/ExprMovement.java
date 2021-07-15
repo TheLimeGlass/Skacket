@@ -3,11 +3,11 @@ package me.limeglass.skacket.elements.expressions;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
-import ch.njol.skript.ScriptLoader;
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
+import ch.njol.skript.lang.parser.ParserInstance;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.util.Kleenean;
@@ -22,7 +22,7 @@ public class ExprMovement extends SimpleExpression<Movement> {
 
 	@Override
 	public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parseResult) {
-		if (!ScriptLoader.isCurrentEvent(SteerVehicleEvent.class)) {
+		if (!ParserInstance.get().isCurrentEvent(SteerVehicleEvent.class)) {
 			Skript.error("Cannot use 'movements' outside of the steer vehicle event", ErrorQuality.SEMANTIC_ERROR);
 			return false;
 		}

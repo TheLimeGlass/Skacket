@@ -4,11 +4,11 @@ import org.bukkit.event.Event;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.eclipse.jdt.annotation.Nullable;
 
-import ch.njol.skript.ScriptLoader;
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
+import ch.njol.skript.lang.parser.ParserInstance;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.util.Kleenean;
@@ -21,7 +21,7 @@ public class ExprRawSlot extends SimpleExpression<Number> {
 
 	@Override
 	public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parseResult) {
-		if (!ScriptLoader.isCurrentEvent(InventoryClickEvent.class)) {
+		if (!ParserInstance.get().isCurrentEvent(InventoryClickEvent.class)) {
 			Skript.error("Cannot use 'raw slow' outside of the inventory click event", ErrorQuality.SEMANTIC_ERROR);
 			return false;
 		}

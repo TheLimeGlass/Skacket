@@ -10,7 +10,6 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.event.Event;
 
-import ch.njol.skript.ScriptLoader;
 import ch.njol.skript.Skript;
 import ch.njol.skript.config.Node;
 import ch.njol.skript.config.SectionNode;
@@ -19,6 +18,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.skript.lang.TriggerSection;
+import ch.njol.skript.lang.parser.ParserInstance;
 import ch.njol.skript.log.HandlerList;
 import ch.njol.skript.log.LogHandler;
 import ch.njol.skript.log.ParseLogHandler;
@@ -100,15 +100,16 @@ public abstract class Section extends Condition {
 
 	@SuppressWarnings("unchecked")
 	public void loadSection(String name, boolean setNext, Class<? extends Event>... events) {
-		if (section != null && name != null && events != null && events.length > 0) {
-			String previousName = ScriptLoader.getCurrentEventName();
-			Class<? extends Event>[] previousEvents = ScriptLoader.getCurrentEvents();
-			Kleenean previousDelay = ScriptLoader.hasDelayBefore;
-			ScriptLoader.setCurrentEvent(name, events);
-			loadSection(setNext);
-			ScriptLoader.setCurrentEvent(previousName, previousEvents);
-			ScriptLoader.hasDelayBefore = previousDelay;
-		}
+		if (section == null || name == null || events == null || events.length <= 0)
+			return;
+		ParserInstance instance = ParserInstance.get();
+		String previousName = instance.getCurrentEventName();
+		Class<? extends Event>[] previousEvents = instance.getCurrentEvents();
+		Kleenean previousDelay = instance.getHasDelayBefore();
+		instance.setCurrentEvent(name, events);
+		loadSection(setNext);
+		instance.setCurrentEvent(previousName, previousEvents);
+		instance.setHasDelayBefore(previousDelay);
 	}
 
 	public boolean hasSection() {
