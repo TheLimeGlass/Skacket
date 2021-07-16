@@ -1,7 +1,7 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-	id 'com.github.johnrengelman.shadow' version '5.2.0'
+	id 'com.github.johnrengelman.shadow' version '7.0.0'
 	id 'maven-publish'
 	id 'eclipse'
 	id 'java'
@@ -9,7 +9,6 @@ plugins {
 
 repositories {
 	mavenCentral()
-	jcenter()
 
 	//Spigot
 	maven {
@@ -52,15 +51,15 @@ dependencies {
 	implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.600')
 
 	//Spigot/Bukkit
-	implementation (group: 'org.spigotmc', name: 'spigot-api', version: '1.17-R0.1-SNAPSHOT')
+	implementation (group: 'org.spigotmc', name: 'spigot-api', version: '1.17.1-R0.1-SNAPSHOT')
 
 	//Skript
-	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.6-beta2') {
+	implementation (group: 'com.github.APickledWalrus', name: 'Skript', version: 'f2af79e67d') {
 		transitive = false
 	}
 
 	// ProtocolLib
-	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.7.0-SNAPSHOT") {
+	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.7.1-SNAPSHOT") {
 		transitive = false
 	}
 
@@ -81,17 +80,13 @@ processResources {
         include '**/*'
         into 'lang/'
     }
-	from (sourceSets.main.resources.srcDirs) {
-		include '**/*.yml'
-	}
 }
 
 shadowJar {
 	configurations = [project.configurations.shadow]
-	archiveVersion = version
-	baseName = project.name
+	archiveVersion = project.property("version")
+	archiveBaseName = project.name
 	classifier = ''
-	relocate 'net.wesjd.anvilgui', 'me.limeglass.skacket.anvilgui'
 	minimize()
 	dependencies {
 		exclude(dependency('org.spigotmc:'))

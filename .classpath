@@ -31,17 +31,17 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.spigotmc/spigot-api/1.17-R0.1-SNAPSHOT/c495127e56859cacfb86a5b82cd966f669237bb9/spigot-api-1.17-R0.1-SNAPSHOT-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.spigotmc/spigot-api/1.17-R0.1-SNAPSHOT/6f7523ed919c5f0ec3a69ec3861523e6623f3499/spigot-api-1.17-R0.1-SNAPSHOT.jar">
+	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.spigotmc/spigot-api/1.17.1-R0.1-SNAPSHOT/e9e9b6422351aa853af3a4a900bd8ca0a30a6442/spigot-api-1.17.1-R0.1-SNAPSHOT-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.spigotmc/spigot-api/1.17.1-R0.1-SNAPSHOT/400c34bd203f9cfcb540ca6d8aee469b56593bc5/spigot-api-1.17.1-R0.1-SNAPSHOT.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.SkriptLang/Skript/2.6-beta2/261a36b7bcf463d4afb0d971601f89a37e3fbaea/Skript-2.6-beta2-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.SkriptLang/Skript/2.6-beta2/88b3a2bf2bb2a91e098a03824cc5160a7d03b176/Skript-2.6-beta2.jar">
+	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.APickledWalrus/Skript/f2af79e67d/7339fc1da1cd88cc476d70f64a35ef2015fe62fb/Skript-f2af79e67d-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.github.APickledWalrus/Skript/f2af79e67d/d5914befae9d6a6e11befe9d2b2c891d115fa25a/Skript-f2af79e67d.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.comphenix.protocol/ProtocolLib/4.7.0-SNAPSHOT/ab49df053bcd5b26a96865e4e976eaa08657a8b1/ProtocolLib-4.7.0-SNAPSHOT-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.comphenix.protocol/ProtocolLib/4.7.0-SNAPSHOT/1709b51e740508c3047fdf9e0e51cc12cfaef218/ProtocolLib-4.7.0-SNAPSHOT.jar">
+	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/com.comphenix.protocol/ProtocolLib/4.7.1-SNAPSHOT/33a3ff5fbbe11e82fae94bc3ee384adb5bd73d40/ProtocolLib-4.7.1-SNAPSHOT.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
@@ -51,7 +51,7 @@
 			<attribute name="gradle_used_by_scope" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/net.wesjd/anvilgui/1.5.0-SNAPSHOT/4e6d2ce952bb985e533378d9d8bb15e73f816bcd/anvilgui-1.5.0-SNAPSHOT.jar">
+	<classpathentry kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/net.wesjd/anvilgui/1.5.1-SNAPSHOT/8ffdd6d773f9c21010e123e4561607931bdf3716/anvilgui-1.5.1-SNAPSHOT.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value=""/>
 		</attributes>
@@ -82,11 +82,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.yaml/snakeyaml/1.28/1df44bcfb045ca926511dae52d4857b8b3721d31/snakeyaml-1.28-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/org.yaml/snakeyaml/1.28/7cae037c3014350c923776548e71c9feb7a69259/snakeyaml-1.28.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy/1.11.0/3a929801580c31fafac1643cf61d86c45bc12631/byte-buddy-1.11.0-sources.jar" kind="lib" path="C:/Users/Sean Grover/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy/1.11.0/8dbef4df5936f5831fe97a9d0fe03e14b2e541e6/byte-buddy-1.11.0.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
