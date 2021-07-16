@@ -54,7 +54,7 @@ dependencies {
 	implementation (group: 'org.spigotmc', name: 'spigot-api', version: '1.17.1-R0.1-SNAPSHOT')
 
 	//Skript
-	implementation (group: 'com.github.APickledWalrus', name: 'Skript', version: 'f2af79e67d') {
+	implementation (group: 'com.github.APickledWalrus', name: 'Skript', version: '425f10a01d') {
 		transitive = false
 	}
 
@@ -68,7 +68,7 @@ dependencies {
 	}
 
 	// AnvilGUI
-	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.5.0-SNAPSHOT')
+	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.5.1-SNAPSHOT')
 
 	shadow (group: 'org.json', name: 'json', version: '20201115')
 
