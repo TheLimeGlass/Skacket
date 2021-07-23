@@ -17,7 +17,6 @@ import ch.njol.skript.lang.TriggerItem;
 import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
 import me.limeglass.skacket.Skacket;
-import me.limeglass.skacket.sections.OptionalSection;
 
 public class SecOpenSign extends EffectSection {
 
@@ -39,7 +38,7 @@ public class SecOpenSign extends EffectSection {
 	}
 
 	@Override
-	protected void execute(Event event) {
+	protected TriggerItem walk(Event event) {
 		String[] text = lines != null ? lines.getArray(event) : new String[] {};
 		Skacket.getInstance().getSignManager()
 				.open(event, text, players.getArray(event))
@@ -47,11 +46,11 @@ public class SecOpenSign extends EffectSection {
 					if (!hasSection())
 						return;
 					// Copy local variables into the event.
-					Object localVariables = Variables.removeLocals(event);
+					Object localVariables = Variables.copyLocalVariables(event);
 					Variables.setLocalVariables(update, localVariables);
-					Variables.setLocalVariables(event, localVariables);
-					runSection(update);
+					run(update);
 				});
+		return walk(event, true);
 	}
 
 	@Override
@@ -60,12 +59,6 @@ public class SecOpenSign extends EffectSection {
 			return "open sign";
 		String text = lines != null ? " with lines " + Arrays.toString(lines.getArray(event)) : "";
 		return "open sign to " + players.toString(event, debug) + text;
-	}
-
-	@Override
-	protected @Nullable TriggerItem walk(Event e) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
