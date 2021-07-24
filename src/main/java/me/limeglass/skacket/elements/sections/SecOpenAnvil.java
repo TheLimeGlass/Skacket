@@ -28,9 +28,9 @@ import net.wesjd.anvilgui.AnvilGUI;
 public class SecOpenAnvil extends Section {
 
 	static {
-		Skript.registerSection(SecOpenAnvil.class, "open [an] anvil [gui] (named|with title) %string% to %players% with [left item %itemstack% and] [right] item %itemstack%",
+		Skript.registerSection(SecOpenAnvil.class, "open [an] anvil [gui] (named|with title) %string% to %players% with left item %itemstack% [and [right] item %-itemstack%]",
 				"open [an] anvil [gui] (named|with title) %string% to %players% with [items] %itemstacks%",
-				"open [an] anvil [gui] (named|with title) %string% to %players% with [left item %itemstack% and] [right] item %itemstack% [and prevent close]");
+				"open [an] anvil [gui] (named|with title) %string% to %players% with left item %itemstack% [and [right] item %-itemstack%] [and prevent close]");
 	}
 
 	private Expression<ItemStack> left, right, items;
@@ -50,8 +50,8 @@ public class SecOpenAnvil extends Section {
 		} else {
 			left = (Expression<ItemStack>) expressions[2];
 			right = (Expression<ItemStack>) expressions[3];
-			if (right == null)
-				Skript.error("Right item must be defined in the anvil expression.", ErrorQuality.SEMANTIC_ERROR);
+			if (left == null)
+				Skript.error("Left item must be defined in the anvil expression.", ErrorQuality.SEMANTIC_ERROR);
 		}
 		preventClose = matchedPattern == 2;
 		super.setNext(this);
@@ -65,9 +65,9 @@ public class SecOpenAnvil extends Section {
 		if (this.items != null) {
 			items.addAll(Lists.newArrayList(this.items.getArray(event)));
 		} else {
-			if (left != null)
-				items.add(left.getSingle(event));
-			items.add(right.getSingle(event));
+			items.add(left.getSingle(event));
+			if (right != null)
+				items.add(right.getSingle(event));
 		}
 		if (items.isEmpty())
 			return null;
