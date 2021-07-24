@@ -20,6 +20,7 @@ public class NamedSoundEvent extends Event implements Cancellable {
 	private float pitch;
 
 	public NamedSoundEvent(Player player, Sound sound, SoundCategory category, Location location, float volume, float pitch) {
+		super(true);
 		this.category = category;
 		this.location = location;
 		this.volume = volume;

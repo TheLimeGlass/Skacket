@@ -135,7 +135,7 @@ public class PacketListeners {
 				Direction direction = wrapper.getDirection();
 				PlayerDigType type = wrapper.getDigType();
 				PlayerBlockDigEvent dig = new PlayerBlockDigEvent(location.getBlock(), player, type, direction);
-				Bukkit.getPluginManager().callEvent(dig);
+				Bukkit.getScheduler().runTask(Skacket.getInstance(), () -> Bukkit.getPluginManager().callEvent(dig));
 				if (dig.isCancelled())
 					event.setCancelled(true);
 			}
