@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
@@ -81,6 +82,7 @@ public class SecOpenAnvil extends Section {
 		builder.onComplete((player, text) -> {
 			AnvilGUIEvent anvil = new AnvilGUIEvent(player, text);
 			Variables.setLocalVariables(anvil, localVariables);
+			Bukkit.getPluginManager().callEvent(anvil);
 			run(anvil);
 			return anvil.getResponse();
 		});

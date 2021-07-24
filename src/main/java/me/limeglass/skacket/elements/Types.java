@@ -2,11 +2,13 @@ package me.limeglass.skacket.elements;
 
 import java.util.Locale;
 
+import org.bukkit.inventory.Inventory;
 import org.eclipse.jdt.annotation.Nullable;
 
 import com.comphenix.protocol.wrappers.EnumWrappers.ItemSlot;
 import com.comphenix.protocol.wrappers.EnumWrappers.PlayerDigType;
 
+import ch.njol.skript.classes.Changer;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.EnumSerializer;
 import ch.njol.skript.classes.Parser;
@@ -16,6 +18,7 @@ import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
 import me.limeglass.skacket.events.SteerVehicleEvent.Movement;
 import me.limeglass.skacket.objects.ClientWorldBorder;
+import net.wesjd.anvilgui.AnvilGUI.Response;
 
 public class Types {
 
@@ -157,6 +160,55 @@ public class Types {
 
 				})
 				.serializer(new EnumSerializer<>(PlayerDigType.class)));
+		Classes.registerClass(new ClassInfo<>(Response.class, "anvilresponse")
+				.user("(anvil ?)?responses?")
+				.name("Anvil GUI Response")
+				.changer(new Changer<Response>() {
+
+					@Override
+					public @Nullable Class<?>[] acceptChange(ChangeMode mode) {
+						if (mode == ChangeMode.SET)
+							return new Class[] {Inventory.class, String.class};
+						return null;
+					}
+
+					@Override
+					public void change(Response[] response, @Nullable Object[] delta, ChangeMode mode) {
+						Object object = delta[0];
+						if (object instanceof Inventory) {
+							Inventory inventory = (Inventory) object;
+							response[0] = Response.openInventory(inventory);
+							return;
+						}
+						String string = (String) object;
+						response[0] = Response.text(string);
+					}
+
+				})
+				.defaultExpression(new EventValueExpression<>(Response.class))
+				.parser(new Parser<Response>() {
+
+					@Override
+					public boolean canParse(ParseContext context) {
+						return false;
+					}
+
+					@Override
+					public String toString(Response response, int flags) {
+						return response.getText();
+					}
+
+					@Override
+					public String toVariableNameString(Response response) {
+						return response.getText();
+					}
+
+					@Override
+					public String getVariableNamePattern() {
+						return "\\S+";
+					}
+
+				}));
 	}
 
 }
