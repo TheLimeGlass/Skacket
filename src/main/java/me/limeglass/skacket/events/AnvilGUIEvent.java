@@ -3,30 +3,31 @@ package me.limeglass.skacket.events;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
-
-import net.wesjd.anvilgui.AnvilGUI.Response;
+import org.eclipse.jdt.annotation.Nullable;
 
 public class AnvilGUIEvent extends PlayerEvent {
 
 	private static final HandlerList handlers = new HandlerList();
-	private Response response = Response.close();
 	private final String text;
+	private final Click click;
 
-	public AnvilGUIEvent(Player player, String text) {
+	public AnvilGUIEvent(Player player, @Nullable String text, Click click) {
 		super(player);
 		this.text = text;
+		this.click = click;
 	}
 
+	public enum Click {
+		LEFT, RIGHT, COMPLETE;
+	}
+
+	@Nullable
 	public String getText() {
 		return text;
 	}
 
-	public Response getResponse() {
-		return response;
-	}
-
-	public void setResponse(Response response) {
-		this.response = response;
+	public Click getClickType() {
+		return click;
 	}
 
 	public HandlerList getHandlers() {

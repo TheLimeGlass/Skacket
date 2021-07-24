@@ -9,8 +9,8 @@ import ch.njol.skript.lang.util.SimpleEvent;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import me.limeglass.skacket.events.AnvilGUIEvent;
+import me.limeglass.skacket.events.AnvilGUIEvent.Click;
 import me.limeglass.skacket.events.ServerSignChangeEvent;
-import net.wesjd.anvilgui.AnvilGUI.Response;
 
 public class Events {
 
@@ -46,11 +46,11 @@ public class Events {
 				return event.getText();
 			}
 		}, 0);
-		EventValues.registerEventValue(AnvilGUIEvent.class, Response.class, new Getter<Response, AnvilGUIEvent>() {
+		EventValues.registerEventValue(AnvilGUIEvent.class, Click.class, new Getter<Click, AnvilGUIEvent>() {
 			@Override
 			@Nullable
-			public Response get(AnvilGUIEvent event) {
-				return event.getResponse();
+			public Click get(AnvilGUIEvent event) {
+				return event.getClickType();
 			}
 		}, 0);
 	}

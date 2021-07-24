@@ -2,13 +2,11 @@ package me.limeglass.skacket.elements;
 
 import java.util.Locale;
 
-import org.bukkit.inventory.Inventory;
 import org.eclipse.jdt.annotation.Nullable;
 
 import com.comphenix.protocol.wrappers.EnumWrappers.ItemSlot;
 import com.comphenix.protocol.wrappers.EnumWrappers.PlayerDigType;
 
-import ch.njol.skript.classes.Changer;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.EnumSerializer;
 import ch.njol.skript.classes.Parser;
@@ -16,9 +14,9 @@ import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
+import me.limeglass.skacket.events.AnvilGUIEvent.Click;
 import me.limeglass.skacket.events.SteerVehicleEvent.Movement;
 import me.limeglass.skacket.objects.ClientWorldBorder;
-import net.wesjd.anvilgui.AnvilGUI.Response;
 
 public class Types {
 
@@ -160,47 +158,33 @@ public class Types {
 
 				})
 				.serializer(new EnumSerializer<>(PlayerDigType.class)));
-		Classes.registerClass(new ClassInfo<>(Response.class, "anvilresponse")
-				.user("(anvil ?)?responses?")
-				.name("Anvil GUI Response")
-				.changer(new Changer<Response>() {
+		EnumUtils<Click> clicks = new EnumUtils<>(Click.class, "anvilclick");
+		Classes.registerClass(new ClassInfo<>(Click.class, "anvilclick")
+				.user("anvil ?click( type)?")
+				.name("Anvil Click Type")
+				.usage(clicks.getAllNames())
+				.defaultExpression(new EventValueExpression<>(Click.class))
+				.parser(new Parser<Click>() {
 
 					@Override
-					public @Nullable Class<?>[] acceptChange(ChangeMode mode) {
-						if (mode == ChangeMode.SET)
-							return new Class[] {Inventory.class, String.class};
-						return null;
+					@Nullable
+					public Click parse(String input, ParseContext context) {
+						return clicks.parse(input);
 					}
-
-					@Override
-					public void change(Response[] response, @Nullable Object[] delta, ChangeMode mode) {
-						Object object = delta[0];
-						if (object instanceof Inventory) {
-							Inventory inventory = (Inventory) object;
-							response[0] = Response.openInventory(inventory);
-							return;
-						}
-						String string = (String) object;
-						response[0] = Response.text(string);
-					}
-
-				})
-				.defaultExpression(new EventValueExpression<>(Response.class))
-				.parser(new Parser<Response>() {
 
 					@Override
 					public boolean canParse(ParseContext context) {
-						return false;
+						return true;
 					}
 
 					@Override
-					public String toString(Response response, int flags) {
-						return response.getText();
+					public String toString(Click type, int flags) {
+						return clicks.toString(type, flags);
 					}
 
 					@Override
-					public String toVariableNameString(Response response) {
-						return response.getText();
+					public String toVariableNameString(Click type) {
+						return type.name().toLowerCase(Locale.ENGLISH);
 					}
 
 					@Override
@@ -208,7 +192,8 @@ public class Types {
 						return "\\S+";
 					}
 
-				}));
+				})
+				.serializer(new EnumSerializer<>(Click.class)));
 	}
 
 }

@@ -14,29 +14,39 @@ import com.google.common.collect.Lists;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.config.SectionNode;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.Section;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
+import ch.njol.skript.lang.Trigger;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
 import me.limeglass.skacket.Skacket;
 import me.limeglass.skacket.events.AnvilGUIEvent;
+import me.limeglass.skacket.events.AnvilGUIEvent.Click;
 import net.wesjd.anvilgui.AnvilGUI;
+import net.wesjd.anvilgui.AnvilGUI.Response;
 
+@Name("Open Anvil")
 public class SecOpenAnvil extends Section {
 
 	static {
 		Skript.registerSection(SecOpenAnvil.class, "open [an] anvil [gui] (named|with title) %string% to %players% with left item %itemstack% [and [right] item %-itemstack%]",
 				"open [an] anvil [gui] (named|with title) %string% to %players% with [items] %itemstacks%",
-				"open [an] anvil [gui] (named|with title) %string% to %players% with left item %itemstack% [and [right] item %-itemstack%] [and prevent close]");
+				"open [an] anvil [gui] (named|with title) %string% to %players% with left item %itemstack% [and [right] item %-itemstack%] [[and] exclud(e|ing) left and right clicks]");
 	}
 
 	private Expression<ItemStack> left, right, items;
 	private Expression<Player> players;
 	private Expression<String> title;
-	private boolean preventClose;
+	private boolean excludes;
+
+	@Nullable
+	private TriggerItem actualNext;
+	@Nullable
+	private Trigger trigger;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -53,9 +63,8 @@ public class SecOpenAnvil extends Section {
 			if (left == null)
 				Skript.error("Left item must be defined in the anvil expression.", ErrorQuality.SEMANTIC_ERROR);
 		}
-		preventClose = matchedPattern == 2;
-		super.setNext(this);
-		loadCode(sectionNode, "anvil", AnvilGUIEvent.class);
+		excludes = matchedPattern == 2;
+		trigger = loadCode(sectionNode, "anvil", AnvilGUIEvent.class);
 		return true;
 	}
 
@@ -69,33 +78,62 @@ public class SecOpenAnvil extends Section {
 			if (right != null)
 				items.add(right.getSingle(event));
 		}
-		if (items.isEmpty())
-			return null;
+		if (items.isEmpty()) {
+			debug(event, false);
+			return actualNext;
+		}
 		AnvilGUI.Builder builder = new AnvilGUI.Builder().title(title.getSingle(event)).plugin(Skacket.getInstance());
-		if (preventClose)
-			builder.preventClose();
 		if (items.size() >= 1)
 			builder.itemLeft(items.get(0));
 		if (items.size() >= 2)
 			builder.itemRight(items.get(1));
 		Object localVariables = Variables.copyLocalVariables(event);
 		builder.onComplete((player, text) -> {
-			AnvilGUIEvent anvil = new AnvilGUIEvent(player, text);
-			Variables.setLocalVariables(anvil, localVariables);
+			AnvilGUIEvent anvil = new AnvilGUIEvent(player, text, Click.COMPLETE);
+			if (localVariables != null)
+				Variables.setLocalVariables(anvil, localVariables);
 			Bukkit.getPluginManager().callEvent(anvil);
-			run(anvil);
-			return anvil.getResponse();
+			trigger.execute(anvil);
+			return Response.close();
+		});
+		builder.onLeftInputClick((player) -> {
+			AnvilGUIEvent anvil = new AnvilGUIEvent(player, null, Click.LEFT);
+			if (localVariables != null)
+				Variables.setLocalVariables(anvil, localVariables);
+			Bukkit.getPluginManager().callEvent(anvil);
+			if (!excludes)
+				trigger.execute(anvil);
+		});
+		builder.onRightInputClick((player) -> {
+			AnvilGUIEvent anvil = new AnvilGUIEvent(player, null, Click.RIGHT);
+			if (localVariables != null)
+				Variables.setLocalVariables(anvil, localVariables);
+			Bukkit.getPluginManager().callEvent(anvil);
+			if (!excludes)
+				trigger.execute(anvil);
 		});
 		for (Player player : players.getArray(event))
 			builder.open(player);
-		return walk(event, true);
+		debug(event, false);
+		return actualNext;
+	}
+
+	@Override
+	public SecOpenAnvil setNext(@Nullable TriggerItem next) {
+		actualNext = next;
+		return this;
+	}
+
+	@Nullable
+	public TriggerItem getActualNext() {
+		return actualNext;
 	}
 
 	@Override
 	public String toString(@Nullable Event event, boolean debug) {
 		if (event == null)
 			return "open anvil";
-		String items = this.items != null ? " with items " + Arrays.toString(this.items.getArray(event)) : this.right != null ? " with right item " + right.toString(event, debug) : "";
+		String items = this.items != null ? " with items " + Arrays.toString(this.items.getArray(event)) : this.left != null ? " with left item " + left.toString(event, debug) : "";
 		return "open anvil to " + players.toString(event, debug) + items;
 	}
 

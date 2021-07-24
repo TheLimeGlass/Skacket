@@ -4,6 +4,7 @@ version: @version@
 
 types:
 	movement: steer movement
+	anvilclick: anvil click, anvil click type
 
 movement:
 	left: left, a
@@ -12,3 +13,8 @@ movement:
 	backwards: backwards, down, s
 	jump: jump, space
 	unmount: unmount, dismount, shift
+
+anvilclick:
+	left: left, left click
+	right: right, right click
+	complete: complete, finished
