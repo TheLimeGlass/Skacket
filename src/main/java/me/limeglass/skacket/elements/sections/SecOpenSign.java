@@ -13,6 +13,7 @@ import ch.njol.skript.config.SectionNode;
 import ch.njol.skript.lang.EffectSection;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
+import ch.njol.skript.lang.Trigger;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
@@ -21,11 +22,16 @@ import me.limeglass.skacket.Skacket;
 public class SecOpenSign extends EffectSection {
 
 	static {
-		Skript.registerSection(SecOpenSign.class, "open sign [gui] to %players% [with [(text|lines)] %-strings%]");
+		Skript.registerSection(SecOpenSign.class, "open [a] sign [gui] to %players% [with [(text|lines)] %-strings%]");
 	}
 
 	private Expression<Player> players;
 	private Expression<String> lines;
+
+	@Nullable
+	private TriggerItem actualNext;
+	@Nullable
+	private Trigger trigger;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -33,24 +39,37 @@ public class SecOpenSign extends EffectSection {
 		players = (Expression<Player>) expressions[0];
 		lines = (Expression<String>) expressions[1];
 		if (hasSection())
-			loadCode(sectionNode, "sign update", SignChangeEvent.class);
+			trigger = loadCode(sectionNode, "sign update", SignChangeEvent.class);
 		return true;
 	}
 
 	@Override
 	protected TriggerItem walk(Event event) {
 		String[] text = lines != null ? lines.getArray(event) : new String[] {};
+		Object localVariables = Variables.copyLocalVariables(event);
 		Skacket.getInstance().getSignManager()
 				.open(event, text, players.getArray(event))
 				.onUpdate(update -> {
 					if (!hasSection())
 						return;
 					// Copy local variables into the event.
-					Object localVariables = Variables.copyLocalVariables(event);
-					Variables.setLocalVariables(update, localVariables);
-					run(update);
+					if (localVariables != null)
+						Variables.setLocalVariables(update, localVariables);
+					trigger.execute(update);
 				});
-		return walk(event, true);
+		debug(event, false);
+		return actualNext;
+	}
+
+	@Override
+	public SecOpenSign setNext(@Nullable TriggerItem next) {
+		actualNext = next;
+		return this;
+	}
+
+	@Nullable
+	public TriggerItem getActualNext() {
+		return actualNext;
 	}
 
 	@Override

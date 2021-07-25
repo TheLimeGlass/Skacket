@@ -2,6 +2,7 @@ package me.limeglass.skacket.elements;
 
 import java.util.Locale;
 
+import org.bukkit.Sound;
 import org.eclipse.jdt.annotation.Nullable;
 
 import com.comphenix.protocol.wrappers.EnumWrappers.ItemSlot;
@@ -58,42 +59,44 @@ public class Types {
 
 				})
 				.serializer(new EnumSerializer<>(Movement.class)));
-		EnumUtils<ItemSlot> slots = new EnumUtils<>(ItemSlot.class, "itemslot");
-		Classes.registerClass(new ClassInfo<>(ItemSlot.class, "itemslot")
-				.user("itemslots?")
-				.name("Item Slots Armour")
-				.usage(slots.getAllNames())
-				.defaultExpression(new EventValueExpression<>(ItemSlot.class))
-				.parser(new Parser<ItemSlot>() {
-
-					@Override
-					@Nullable
-					public ItemSlot parse(String input, ParseContext context) {
-						return slots.parse(input);
-					}
-
-					@Override
-					public boolean canParse(ParseContext context) {
-						return true;
-					}
-
-					@Override
-					public String toString(ItemSlot slot, int flags) {
-						return slots.toString(slot, flags);
-					}
-
-					@Override
-					public String toVariableNameString(ItemSlot slot) {
-						return slot.name().toLowerCase(Locale.ENGLISH);
-					}
-
-					@Override
-					public String getVariableNamePattern() {
-						return "\\S+";
-					}
-
-				})
-				.serializer(new EnumSerializer<>(ItemSlot.class)));
+		if (Classes.getExactClassInfo(ItemSlot.class) == null) {
+			EnumUtils<ItemSlot> slots = new EnumUtils<>(ItemSlot.class, "itemslot");
+			Classes.registerClass(new ClassInfo<>(ItemSlot.class, "itemslot")
+					.user("itemslots?")
+					.name("Item Slots Armour")
+					.usage(slots.getAllNames())
+					.defaultExpression(new EventValueExpression<>(ItemSlot.class))
+					.parser(new Parser<ItemSlot>() {
+	
+						@Override
+						@Nullable
+						public ItemSlot parse(String input, ParseContext context) {
+							return slots.parse(input);
+						}
+	
+						@Override
+						public boolean canParse(ParseContext context) {
+							return true;
+						}
+	
+						@Override
+						public String toString(ItemSlot slot, int flags) {
+							return slots.toString(slot, flags);
+						}
+	
+						@Override
+						public String toVariableNameString(ItemSlot slot) {
+							return slot.name().toLowerCase(Locale.ENGLISH);
+						}
+	
+						@Override
+						public String getVariableNamePattern() {
+							return "\\S+";
+						}
+	
+					})
+					.serializer(new EnumSerializer<>(ItemSlot.class)));
+		}
 		Classes.registerClass(new ClassInfo<>(ClientWorldBorder.class, "clientworldborder")
 				.user("clientworldborders?")
 				.name("Client World Border")
@@ -121,43 +124,45 @@ public class Types {
 					}
 
 				}));
-		EnumUtils<PlayerDigType> digs = new EnumUtils<>(PlayerDigType.class, "playerdigtype");
-		Classes.registerClass(new ClassInfo<>(PlayerDigType.class, "playerdigtype")
-				.user("(block)? ?dig ?types?")
-				.name("Player Block Dig Type")
-				.usage(digs.getAllNames())
-				.description("The different types that trigger a player block dig event.")
-				.defaultExpression(new EventValueExpression<>(PlayerDigType.class))
-				.parser(new Parser<PlayerDigType>() {
-
-					@Override
-					@Nullable
-					public PlayerDigType parse(String input, ParseContext context) {
-						return digs.parse(input);
-					}
-
-					@Override
-					public boolean canParse(ParseContext context) {
-						return true;
-					}
-
-					@Override
-					public String toString(PlayerDigType type, int flags) {
-						return digs.toString(type, flags);
-					}
-
-					@Override
-					public String toVariableNameString(PlayerDigType type) {
-						return type.name().toLowerCase(Locale.ENGLISH);
-					}
-
-					@Override
-					public String getVariableNamePattern() {
-						return "\\S+";
-					}
-
-				})
-				.serializer(new EnumSerializer<>(PlayerDigType.class)));
+		if (Classes.getExactClassInfo(PlayerDigType.class) == null) {
+			EnumUtils<PlayerDigType> digs = new EnumUtils<>(PlayerDigType.class, "playerdigtype");
+			Classes.registerClass(new ClassInfo<>(PlayerDigType.class, "playerdigtype")
+					.user("(block)? ?dig ?types?")
+					.name("Player Block Dig Type")
+					.usage(digs.getAllNames())
+					.description("The different types that trigger a player block dig event.")
+					.defaultExpression(new EventValueExpression<>(PlayerDigType.class))
+					.parser(new Parser<PlayerDigType>() {
+	
+						@Override
+						@Nullable
+						public PlayerDigType parse(String input, ParseContext context) {
+							return digs.parse(input);
+						}
+	
+						@Override
+						public boolean canParse(ParseContext context) {
+							return true;
+						}
+	
+						@Override
+						public String toString(PlayerDigType type, int flags) {
+							return digs.toString(type, flags);
+						}
+	
+						@Override
+						public String toVariableNameString(PlayerDigType type) {
+							return type.name().toLowerCase(Locale.ENGLISH);
+						}
+	
+						@Override
+						public String getVariableNamePattern() {
+							return "\\S+";
+						}
+	
+					})
+					.serializer(new EnumSerializer<>(PlayerDigType.class)));
+		}
 		EnumUtils<Click> clicks = new EnumUtils<>(Click.class, "anvilclick");
 		Classes.registerClass(new ClassInfo<>(Click.class, "anvilclick")
 				.user("anvil ?click( type)?")
@@ -194,6 +199,44 @@ public class Types {
 
 				})
 				.serializer(new EnumSerializer<>(Click.class)));
+		if (Classes.getExactClassInfo(PlayerDigType.class) == null) {
+			EnumUtils<Sound> sounds = new EnumUtils<>(Sound.class, "sound");
+			Classes.registerClass(new ClassInfo<>(Sound.class, "sound")
+					.user("sounds?")
+					.name("Sound")
+					.usage(sounds.getAllNames())
+					.defaultExpression(new EventValueExpression<>(Sound.class))
+					.parser(new Parser<Sound>() {
+
+						@Override
+						@Nullable
+						public Sound parse(String input, ParseContext context) {
+							return sounds.parse(input);
+						}
+
+						@Override
+						public boolean canParse(ParseContext context) {
+							return true;
+						}
+
+						@Override
+						public String toString(Sound sound, int flags) {
+							return sounds.toString(sound, flags);
+						}
+
+						@Override
+						public String toVariableNameString(Sound sound) {
+							return sound.name().toLowerCase(Locale.ENGLISH);
+						}
+
+						@Override
+						public String getVariableNamePattern() {
+							return "\\S+";
+						}
+
+					})
+					.serializer(new EnumSerializer<>(Sound.class)));
+		}
 	}
 
 }

@@ -33,6 +33,12 @@ public class EvtNamedSound extends SkriptEvent {
 				return event.getLocation();
 			}
 		}, 0);
+		EventValues.registerEventValue(NamedSoundEvent.class, Number.class, new Getter<Number, NamedSoundEvent>() {
+			@Nullable
+			public Number get(NamedSoundEvent event) {
+				return event.getPitch();
+			}
+		}, 0);
 		EventValues.registerEventValue(NamedSoundEvent.class, Sound.class, new Getter<Sound, NamedSoundEvent>() {
 			@Nullable
 			public Sound get(NamedSoundEvent event) {
