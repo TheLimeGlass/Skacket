@@ -10,7 +10,7 @@ plugins {
 repositories {
 	mavenCentral()
 
-	//Spigot
+	// Spigot
 	maven {
 		url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
 	}
@@ -47,13 +47,13 @@ repositories {
 
 dependencies {
 
-	//Nullable annotation
+	// Nullable annotation
 	implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.600')
 
-	//Spigot/Bukkit
+	// Spigot/Bukkit
 	implementation (group: 'org.spigotmc', name: 'spigot-api', version: '1.17.1-R0.1-SNAPSHOT')
 
-	//Skript
+	// Skript
 	implementation (group: 'com.github.APickledWalrus', name: 'Skript', version: '425f10a01d') {
 		transitive = false
 	}

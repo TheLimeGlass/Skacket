@@ -79,7 +79,7 @@ public class SecOpenAnvil extends Section {
 				items.add(right.getSingle(event));
 		}
 		if (items.isEmpty()) {
-			debug(event, false);
+			debug(event, true);
 			return actualNext;
 		}
 		AnvilGUI.Builder builder = new AnvilGUI.Builder().title(title.getSingle(event)).plugin(Skacket.getInstance());
@@ -114,7 +114,7 @@ public class SecOpenAnvil extends Section {
 		});
 		for (Player player : players.getArray(event))
 			builder.open(player);
-		debug(event, false);
+		debug(event, true);
 		return actualNext;
 	}
 
@@ -122,11 +122,6 @@ public class SecOpenAnvil extends Section {
 	public SecOpenAnvil setNext(@Nullable TriggerItem next) {
 		actualNext = next;
 		return this;
-	}
-
-	@Nullable
-	public TriggerItem getActualNext() {
-		return actualNext;
 	}
 
 	@Override
