@@ -50,7 +50,7 @@ dependencies {
 	}
 
 	// ProtocolLib
-	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.7.1-SNAPSHOT") {
+	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.8.0-SNAPSHOT") {
 		transitive = false
 	}
 
