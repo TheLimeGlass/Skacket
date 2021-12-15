@@ -25,14 +25,6 @@ repositories {
 		url "https://repo.dmulloy2.net/repository/public/"
 	}
 
-	maven {
-		url 'https://maven.pkg.github.com/Sitrica/GlowingAPI/'
-		credentials {
-			username = "Sitrica"
-			password = System.getenv("GITHUB_PACKAGES_KEY") ?: "${{secrets.GITHUB_TOKEN}}"
-		}
-	}
-
 	// Anvil GUI
 	maven {
 		url "https://repo.codemc.io/repository/maven-snapshots/"
@@ -63,7 +55,7 @@ dependencies {
 		transitive = false
 	}
 
-	shadow (group: 'com.sitrica', name: 'GlowingAPI', version: '1.0.0') {
+	shadow (group: 'com.github.Sitrica', name: 'GlowingAPI', version: '1.0.0') {
 		transitive = false
 	}
 
