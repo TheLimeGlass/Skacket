@@ -58,12 +58,14 @@ public class EvtPlayerDig extends SkriptEvent {
 	@Nullable
 	private Literal<ItemType> items;
 	private boolean release;
+	private int type;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean init(Literal<?>[] args, int matchedPattern, ParseResult parseResult) {
 		items = (Literal<ItemType>) args[0];
 		release = matchedPattern == 1;
+		type = matchedPattern;
 		return true;
 	}
 
@@ -72,6 +74,12 @@ public class EvtPlayerDig extends SkriptEvent {
 		PlayerBlockDigEvent digEvent = (PlayerBlockDigEvent) event;
 		if (release)
 			return digEvent.getDigType() == PlayerDigType.RELEASE_USE_ITEM;
+		if (digEvent.getDigType() != PlayerDigType.START_DESTROY_BLOCK && type == 1)
+			return false;
+		if (digEvent.getDigType() != PlayerDigType.STOP_DESTROY_BLOCK && type == 2)
+			return false;
+		if (digEvent.getDigType() != PlayerDigType.ABORT_DESTROY_BLOCK && type == 3)
+			return false;
 		Material material = digEvent.getBlock().getType();
 		return items.check(event, new Checker<ItemType>() {
 			@Override
