@@ -9,8 +9,7 @@ import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.BlockPosition;
 
 public class WrapperPlayServerBlockBreakAnimation extends AbstractPacket {
-	public static final PacketType TYPE =
-			PacketType.Play.Server.BLOCK_BREAK_ANIMATION;
+	public static final PacketType TYPE = PacketType.Play.Server.BLOCK_BREAK_ANIMATION;
 
 	public WrapperPlayServerBlockBreakAnimation() {
 		super(new PacketContainer(TYPE), TYPE);
