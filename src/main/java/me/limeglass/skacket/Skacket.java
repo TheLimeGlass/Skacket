@@ -3,7 +3,6 @@ package me.limeglass.skacket;
 import java.io.File;
 import java.io.IOException;
 
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.comphenix.protocol.ProtocolLibrary;
@@ -45,7 +44,7 @@ public final class Skacket extends JavaPlugin {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Bukkit.getConsoleSender().sendMessage("[Skacket] Skacket has been enabled!");
+		getLogger().info("[Skacket] Skacket has been enabled!");
 	}
 
 	public ProtocolManager getProtocolManager() {

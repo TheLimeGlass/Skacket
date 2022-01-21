@@ -15,6 +15,7 @@ import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.EnumUtils;
+import eu.endercentral.crazy_advancements.advancement.AdvancementDisplay.AdvancementFrame;
 import me.limeglass.skacket.events.AnvilGUIEvent.Click;
 import me.limeglass.skacket.events.SteerVehicleEvent.Movement;
 import me.limeglass.skacket.objects.ClientWorldBorder;
@@ -237,6 +238,42 @@ public class Types {
 					})
 					.serializer(new EnumSerializer<>(Sound.class)));
 		}
+		EnumUtils<AdvancementFrame> frames = new EnumUtils<>(AdvancementFrame.class, "advancementframe");
+		Classes.registerClass(new ClassInfo<>(AdvancementFrame.class, "advancementframe")
+				.user("advancementframes?")
+				.name("AdvancementFrame")
+				.usage(frames.getAllNames())
+				.defaultExpression(new EventValueExpression<>(AdvancementFrame.class))
+				.parser(new Parser<AdvancementFrame>() {
+
+					@Override
+					@Nullable
+					public AdvancementFrame parse(String input, ParseContext context) {
+						return frames.parse(input);
+					}
+
+					@Override
+					public boolean canParse(ParseContext context) {
+						return true;
+					}
+
+					@Override
+					public String toString(AdvancementFrame frame, int flags) {
+						return frames.toString(frame, flags);
+					}
+
+					@Override
+					public String toVariableNameString(AdvancementFrame frame) {
+						return frame.name().toLowerCase(Locale.ENGLISH);
+					}
+
+					@Override
+					public String getVariableNamePattern() {
+						return "\\S+";
+					}
+
+				})
+				.serializer(new EnumSerializer<>(AdvancementFrame.class)));
 	}
 
 }

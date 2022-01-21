@@ -5,6 +5,7 @@ version: @version@
 types:
 	movement: steer movement
 	anvilclick: anvil click, anvil click type
+	advancementframe: advancement frame
 
 movement:
 	left: left, a
@@ -18,3 +19,8 @@ anvilclick:
 	left: left, left click
 	right: right, right click
 	complete: complete, finished
+
+advancementframe:
+	goal: goal
+	challenge: challenge
+	task: task
