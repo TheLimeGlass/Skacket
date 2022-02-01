@@ -53,11 +53,6 @@ public class Types {
 						return movement.name().toLowerCase(Locale.ENGLISH);
 					}
 
-					@Override
-					public String getVariableNamePattern() {
-						return "\\S+";
-					}
-
 				})
 				.serializer(new EnumSerializer<>(Movement.class)));
 		if (Classes.getExactClassInfo(ItemSlot.class) == null) {
@@ -90,11 +85,6 @@ public class Types {
 							return slot.name().toLowerCase(Locale.ENGLISH);
 						}
 	
-						@Override
-						public String getVariableNamePattern() {
-							return "\\S+";
-						}
-	
 					})
 					.serializer(new EnumSerializer<>(ItemSlot.class)));
 		}
@@ -117,11 +107,6 @@ public class Types {
 					@Override
 					public String toVariableNameString(ClientWorldBorder border) {
 						return border.getWorld().getName().toLowerCase(Locale.ENGLISH);
-					}
-
-					@Override
-					public String getVariableNamePattern() {
-						return "\\S+";
 					}
 
 				}));
@@ -156,11 +141,6 @@ public class Types {
 							return type.name().toLowerCase(Locale.ENGLISH);
 						}
 	
-						@Override
-						public String getVariableNamePattern() {
-							return "\\S+";
-						}
-	
 					})
 					.serializer(new EnumSerializer<>(PlayerDigType.class)));
 		}
@@ -191,11 +171,6 @@ public class Types {
 					@Override
 					public String toVariableNameString(Click type) {
 						return type.name().toLowerCase(Locale.ENGLISH);
-					}
-
-					@Override
-					public String getVariableNamePattern() {
-						return "\\S+";
 					}
 
 				})
@@ -230,11 +205,6 @@ public class Types {
 							return sound.name().toLowerCase(Locale.ENGLISH);
 						}
 
-						@Override
-						public String getVariableNamePattern() {
-							return "\\S+";
-						}
-
 					})
 					.serializer(new EnumSerializer<>(Sound.class)));
 		}
@@ -265,11 +235,6 @@ public class Types {
 					@Override
 					public String toVariableNameString(AdvancementFrame frame) {
 						return frame.name().toLowerCase(Locale.ENGLISH);
-					}
-
-					@Override
-					public String getVariableNamePattern() {
-						return "\\S+";
 					}
 
 				})
