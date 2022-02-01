@@ -175,7 +175,7 @@ public class Types {
 
 				})
 				.serializer(new EnumSerializer<>(Click.class)));
-		if (Classes.getExactClassInfo(PlayerDigType.class) == null) {
+		if (Classes.getExactClassInfo(Sound.class) == null) {
 			EnumUtils<Sound> sounds = new EnumUtils<>(Sound.class, "sound");
 			Classes.registerClass(new ClassInfo<>(Sound.class, "sound")
 					.user("sounds?")
