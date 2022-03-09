@@ -64,7 +64,7 @@ dependencies {
 	}
 
 	// AnvilGUI
-	//shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.5.3-SNAPSHOT')
+	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.5.3-SNAPSHOT')
 
 	shadow (group: 'org.json', name: 'json', version: '20211205')
 
@@ -86,7 +86,6 @@ shadowJar {
 	archiveBaseName = project.name
 	classifier = ''
 	relocate 'eu.endercentral.crazy_advancements', 'me.limeglass.crazy_advancements'
-	minimize()
 	dependencies {
 		exclude(dependency('org.spigotmc:'))
 		exclude(dependency('org.yaml:'))
