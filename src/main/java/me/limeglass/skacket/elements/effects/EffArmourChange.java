@@ -32,7 +32,7 @@ import me.limeglass.skacket.wrappers.WrapperPlayServerEntityEquipment;
 public class EffArmourChange extends Effect {
 
 	static {
-		Skript.registerEffect(EffArmourChange.class, "make %livingentities% appear to be wearing %itemtypes% in slot %itemslots% [(for|to) %-players%]", "set armo[u]r of %livingentities% to %itemtypes% in slot %itemslots% [(for|to) %-players%]");
+		Skript.registerEffect(EffArmourChange.class, "make %livingentities% appear to be wearing %itemstacks% in slot %itemslots% [(for|to) %-players%]", "set armo[u]r of %livingentities% to %itemstacks% in slot %itemslots% [(for|to) %-players%]");
 	}
 
 	private Expression<LivingEntity> entities;
