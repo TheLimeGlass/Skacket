@@ -59,9 +59,9 @@ dependencies {
 		transitive = false
 	}
 
-	shadow (group: 'com.github.Sitrica', name: 'GlowingAPI', version: 'master-SNAPSHOT') {
-		transitive = false
-	}
+	//shadow (group: 'com.github.Sitrica', name: 'GlowingAPI', version: 'master-SNAPSHOT') {
+	//	transitive = false
+	//}
 
 	// AnvilGUI
 	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.5.3-SNAPSHOT')
