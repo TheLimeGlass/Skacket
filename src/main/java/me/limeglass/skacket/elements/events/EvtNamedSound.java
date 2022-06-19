@@ -77,6 +77,8 @@ public class EvtNamedSound extends SkriptEvent {
 
 	@Override
 	public String toString(@Nullable Event event, boolean debug) {
+		if (event == null || debug)
+			return "on sound";
 		return "on sound" + (sounds != null && event != null ? " " + sounds.toString(event, debug) : "");
 	}
 

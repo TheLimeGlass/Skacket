@@ -5,12 +5,16 @@ import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import me.limeglass.skacket.objects.ClientWorldBorder;
 
+@Name("Send Client Border")
+@Description("Send a border to a player. This effect is for 1.16.3 and lower. 1.16.4 and up use the set border effect.")
 public class EffSendClientBorder extends Effect {
 
 	static {
@@ -36,12 +40,12 @@ public class EffSendClientBorder extends Effect {
 		ClientWorldBorder border = this.border.getSingle(event);
 		if (border == null || players == null)
 			return;
-		border.send(players);
+		border.sendInitalize(players);
 	}
 
 	@Override
 	public String toString(@Nullable Event event, boolean debug) {
-		if (event == null)
+		if (event == null || debug)
 			return "client border send";
 		return "client border send to " + players.toString(event, debug);
 	}

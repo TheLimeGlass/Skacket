@@ -43,7 +43,7 @@ public class EffToastNotification extends Effect {
 
 	@Override
 	public String toString(@Nullable Event event, boolean debug) {
-		if (event == null)
+		if (event == null || debug)
 			return "toast notification";
 		return "toast notification to " + players.toString(event, debug) + " description " + description.toString(event, debug);
 	}

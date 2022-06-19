@@ -23,12 +23,16 @@ import com.comphenix.protocol.wrappers.Pair;
 import com.google.common.collect.Sets;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import me.limeglass.skacket.wrappers.WrapperPlayServerEntityEquipment;
 
+@Name("Armour Change Client Side")
+@Description("Change what a player is wearing for another player, client side.")
 public class EffArmourChange extends Effect {
 
 	static {
@@ -98,7 +102,7 @@ public class EffArmourChange extends Effect {
 
 	@Override
 	public String toString(@Nullable Event event, boolean debug) {
-		if (event == null)
+		if (event == null || debug)
 			return "client side armour";
 		return "client side armour to " + entities.toString(event, debug) + " armour " + items.toString(event, debug);
 	}

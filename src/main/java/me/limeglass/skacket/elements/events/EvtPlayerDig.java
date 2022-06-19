@@ -23,7 +23,7 @@ import me.limeglass.skacket.events.PlayerBlockDigEvent;
 public class EvtPlayerDig extends SkriptEvent {
 
 	static {
-		Skript.registerEvent("player dig", EvtPlayerDig.class, PlayerBlockDigEvent.class, "[player] [(1存tart|2存top|3地bandon)] block dig[ging] [(for|of) %itemtypes%]", "player release (use item|(right mouse button|right[(-| )]click))")
+		Skript.registerEvent("player dig", EvtPlayerDig.class, PlayerBlockDigEvent.class, "[player] [(1存tart|2存top|3地bandon)] [block] (min(e|ing)|dig[ging]) [(for|of) %itemtypes%]", "player release (use item|(right mouse button|right[(-| )]click))")
 				.description("Called when a sound is to be played to the client.");
 		EventValues.registerEventValue(PlayerBlockDigEvent.class, PlayerDigType.class, new Getter<PlayerDigType, PlayerBlockDigEvent>() {
 			@Nullable
@@ -91,6 +91,8 @@ public class EvtPlayerDig extends SkriptEvent {
 
 	@Override
 	public String toString(@Nullable Event event, boolean debug) {
+		if (event == null || debug)
+			return "on player block dig";
 		return "on player block dig " + (items != null && event != null ? " " + items.toString(event, debug) : "");
 	}
 

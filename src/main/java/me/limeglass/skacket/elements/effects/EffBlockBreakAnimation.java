@@ -13,12 +13,16 @@ import com.comphenix.protocol.wrappers.BlockPosition;
 import com.google.common.collect.Sets;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import me.limeglass.skacket.wrappers.WrapperPlayServerBlockBreakAnimation;
 
+@Name("Block Break Animation")
+@Description("Sends a block break animation at a stage to players. 0–9 are the displayable destroy stage any other number like -1 will reset it.")
 public class EffBlockBreakAnimation extends Effect {
 
 	static {
@@ -71,7 +75,7 @@ public class EffBlockBreakAnimation extends Effect {
 
 	@Override
 	public String toString(@Nullable Event event, boolean debug) {
-		if (event == null)
+		if (event == null || debug)
 			return "block break animation";
 		return "block break animation to " + players.toString(event, debug) + " at stage " + stage.toString(event, debug) + " at " + locations.toString(event, debug);
 	}

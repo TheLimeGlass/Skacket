@@ -3,12 +3,14 @@ package me.limeglass.skacket.elements.effects;
 import org.bukkit.event.Event;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.NoDoc;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import me.limeglass.skacket.sections.OptionalSection;
 
+@NoDoc
 public class EffEndSection extends Effect {
 
 	static {

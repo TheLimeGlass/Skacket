@@ -4,6 +4,8 @@ import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
@@ -11,6 +13,8 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import me.limeglass.skacket.events.AnvilGUIEvent.Click;
 
+@Name("Anvil Click")
+@Description("Check the click type of the anvil click event.")
 public class CondAnvilClick extends Condition {
 
 	static {
@@ -40,7 +44,7 @@ public class CondAnvilClick extends Condition {
 
 	@Override
 	public String toString(@Nullable Event event, final boolean debug) {
-		if (event == null)
+		if (event == null || debug)
 			return "anvil click";
 		return "anvil click was" + (isNegated() ? " not " : "") + expected.toString(event, debug);
 	}

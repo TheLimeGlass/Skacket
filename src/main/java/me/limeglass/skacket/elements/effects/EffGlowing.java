@@ -13,12 +13,16 @@ import com.google.common.collect.Sets;
 import com.sitrica.glowing.GlowingAPI;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import me.limeglass.skacket.Skacket;
 
+@Name("Client Glowing")
+@Description("Make entities glow for players.")
 public class EffGlowing extends Effect {
 
 	static {
@@ -58,7 +62,7 @@ public class EffGlowing extends Effect {
 
 	@Override
 	public String toString(@Nullable Event event, boolean debug) {
-		if (event == null)
+		if (event == null || debug)
 			return "client glowing";
 		if (players == null)
 			return "client glowing of " + entities.toString(event, debug) + " for all players";

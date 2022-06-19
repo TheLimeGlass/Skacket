@@ -4,15 +4,17 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.EnumWrappers.WorldBorderAction;
 
-public class WrapperPlayServerWorldBorder extends AbstractPacket {
+public class OldWrapperPlayServerWorldBorder extends AbstractPacket {
+
+	@SuppressWarnings("deprecation")
 	public static final PacketType TYPE = PacketType.Play.Server.WORLD_BORDER;
 
-	public WrapperPlayServerWorldBorder() {
+	public OldWrapperPlayServerWorldBorder() {
 		super(new PacketContainer(TYPE), TYPE);
 		handle.getModifier().writeDefaults();
 	}
 
-	public WrapperPlayServerWorldBorder(PacketContainer packet) {
+	public OldWrapperPlayServerWorldBorder(PacketContainer packet) {
 		super(packet, TYPE);
 	}
 

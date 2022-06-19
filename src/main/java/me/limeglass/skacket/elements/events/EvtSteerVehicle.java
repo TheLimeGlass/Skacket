@@ -57,6 +57,8 @@ public class EvtSteerVehicle extends SkriptEvent {
 
 	@Override
 	public String toString(@Nullable Event event, boolean debug) {
+		if (event == null || debug)
+			return "on vehicle steer";
 		return "on steering vehicle" + (movements != null && event != null ? " " + movements.toString(event, debug) : "");
 	}
 
