@@ -59,12 +59,14 @@ dependencies {
 		transitive = false
 	}
 
-	//shadow (group: 'com.github.Sitrica', name: 'GlowingAPI', version: 'master-SNAPSHOT') {
-	//	transitive = false
-	//}
+	shadow (group: 'com.github.Sitrica', name: 'GlowingAPI', version: 'master-SNAPSHOT') {
+		transitive = false
+	}
 
-	// AnvilGUI
+	// AnvilGUI (WesJD has no idea what they're doing!)
+	//shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.5.3-20220729.205419-10')
 	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.5.3-SNAPSHOT')
+	//shadow 'com.github.WesJD:anvilgui:master-SNAPSHOT'
 
 	// bStats
 	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.0'
