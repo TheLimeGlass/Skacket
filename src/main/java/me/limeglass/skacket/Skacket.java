@@ -3,6 +3,8 @@ package me.limeglass.skacket;
 import java.io.File;
 import java.io.IOException;
 
+import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimplePie;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.comphenix.protocol.ProtocolLibrary;
@@ -34,7 +36,10 @@ public final class Skacket extends JavaPlugin {
 				configFile.delete();
 		}
 		saveDefaultConfig();
-		metrics = new Metrics(this);
+		metrics = new Metrics(this, 6699);
+		metrics.addCustomChart(new SimplePie("skript_version", () ->
+			Skript.getInstance().getDescription().getVersion()
+		));
 		protocolManager = ProtocolLibrary.getProtocolManager();
 		signManager = new SignManager(this);
 		try {
