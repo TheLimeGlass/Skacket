@@ -59,7 +59,7 @@ dependencies {
 		transitive = false
 	}
 
-	shadow (group: 'com.github.Sitrica', name: 'GlowingAPI', version: 'master-SNAPSHOT') {
+	shadow (group: 'com.github.Sitrica', name: 'GlowingAPI', version: '1.0.1') {
 		transitive = false
 	}
 
