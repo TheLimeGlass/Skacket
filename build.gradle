@@ -69,7 +69,7 @@ dependencies {
 	//shadow 'com.github.WesJD:anvilgui:master-SNAPSHOT'
 
 	// bStats
-	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.0'
+	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.1'
 
 	shadow (group: 'org.json', name: 'json', version: '20220320')
 
