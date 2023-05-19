@@ -65,7 +65,7 @@ dependencies {
 
 	// AnvilGUI (WesJD has no idea what they're doing!)
 	//shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.5.3-20220729.205419-10')
-	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.6.5-SNAPSHOT')
+	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.6.6-SNAPSHOT')
 	//shadow 'com.github.WesJD:anvilgui:master-SNAPSHOT'
 
 	// bStats
