@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.SoundCategory;
+import org.bukkit.block.sign.Side;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.SignChangeEvent;
 
@@ -100,7 +101,7 @@ public class PacketListeners {
 				Location location = position.toLocation(player.getWorld());
 				instance.getSignManager().getSignFor(player).ifPresent(sign -> {
 					Bukkit.getScheduler().runTask(instance, () -> {
-						SignChangeEvent signEvent = new SignChangeEvent(location.getBlock(), event.getPlayer(), lines);
+						SignChangeEvent signEvent = new SignChangeEvent(location.getBlock(), event.getPlayer(), lines, Side.FRONT);
 						if (instance.getConfig().getBoolean("signgui-call-change-event", false)) {
 							Bukkit.getPluginManager().callEvent(signEvent);
 							if (event.isCancelled()) {

@@ -6,6 +6,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
@@ -15,10 +16,11 @@ import me.limeglass.skacket.events.AnvilGUIEvent.Click;
 
 @Name("Anvil Click")
 @Description("Check the click type of the anvil click event.")
+@Since("2.0.6")
 public class CondAnvilClick extends Condition {
 
 	static {
-		Skript.registerCondition(CondAnvilClick.class, "[the] anvil click[ed] [type] (was|is)(0¦|1¦n('|o)t) %anvilclicks%");
+		Skript.registerCondition(CondAnvilClick.class, "[the] anvil click[ed] [type] (was|is)(0Â¦|1Â¦n('|o)t) %anvilclicks%");
 	}
 
 	private Expression<Click> click, expected;

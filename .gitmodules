@@ -1,0 +1,3 @@
+[submodule "GlowingAPI"]
+	path = GlowingAPI
+	url = https://github.com/Sitrica/GlowingAPI

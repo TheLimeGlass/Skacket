@@ -22,7 +22,7 @@ import ch.njol.util.Kleenean;
 import me.limeglass.skacket.wrappers.WrapperPlayServerBlockBreakAnimation;
 
 @Name("Block Break Animation")
-@Description("Sends a block break animation at a stage to players. 0–9 are the displayable destroy stage any other number like -1 will reset it.")
+@Description("Sends a block break animation at a stage to players. 0-9 are the displayable destroy stage any other number like -1 will reset it.")
 public class EffBlockBreakAnimation extends Effect {
 
 	static {

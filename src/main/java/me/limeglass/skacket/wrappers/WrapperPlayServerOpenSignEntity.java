@@ -18,6 +18,24 @@ public class WrapperPlayServerOpenSignEntity extends AbstractPacket {
 	}
 
 	/**
+	 * If the sign is the front side of the sign.
+	 * 
+	 * @return true if the editing side is the front.
+	 */
+	public boolean isFrontSide() {
+		return handle.getBooleans().read(0);
+	}
+
+	/**
+	 * Set if the editor is the front side of the sign or back.
+	 * 
+	 * @param value - true to be the front side, false to be the backside.
+	 */
+	public void setFrontSide(boolean value) {
+		handle.getBooleans().write(0, value);
+	}
+
+	/**
 	 * Retrieve Location.
 	 * <p>
 	 * Notes: block coordinates

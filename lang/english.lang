@@ -18,7 +18,7 @@ movement:
 anvilclick:
 	left: left, left click
 	right: right, right click
-	complete: complete, finished
+	complete: complete, finished, output
 
 advancementframe:
 	goal: goal

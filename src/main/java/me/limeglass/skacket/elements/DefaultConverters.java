@@ -2,9 +2,9 @@ package me.limeglass.skacket.elements;
 
 import org.bukkit.World;
 import org.eclipse.jdt.annotation.Nullable;
+import org.skriptlang.skript.lang.converter.Converter;
+import org.skriptlang.skript.lang.converter.Converters;
 
-import ch.njol.skript.classes.Converter;
-import ch.njol.skript.registrations.Converters;
 import me.limeglass.skacket.objects.ClientWorldBorder;
 
 public class DefaultConverters {

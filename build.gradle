@@ -1,10 +1,24 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-	id 'com.github.johnrengelman.shadow' version '7.1.2'
+	id 'com.github.johnrengelman.shadow' version '8.1.1'
 	id 'eclipse'
 	id 'java'
 }
+
+def latestJava = 17
+def oldestJava = 8
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(latestJava))
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.compilerArgs += ['-source', '' + oldestJava, '-target', '' + oldestJava]
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
 
 repositories {
 	mavenCentral()
@@ -24,6 +38,11 @@ repositories {
 		url "https://repo.codemc.io/repository/maven-snapshots/"
 	}
 
+	// Paper and Adventure API
+	maven {
+		url 'https://repo.papermc.io/repository/maven-public/'
+	}
+
 	// ProtocolLib
 	maven {
 		url "https://repo.dmulloy2.net/repository/public/"
@@ -34,11 +53,6 @@ repositories {
 		url 'https://repo.skriptlang.org/releases'
 	}
 
-	// Jitpack for Sitrica
-	maven {
-		url 'https://jitpack.io'
-	}
-
 }
 
 dependencies {
@@ -47,26 +61,23 @@ dependencies {
 	implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.700')
 
 	// Spigot/Bukkit
-	implementation (group: 'org.spigotmc', name: 'spigot-api', version: '1.19.4-R0.1-SNAPSHOT')
+	implementation (group: 'org.spigotmc', name: 'spigot-api', version: '1.20.1-R0.1-SNAPSHOT')
 
 	// Skript
-	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.6.4') {
+	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.7.0') {
 		transitive = false
 	}
 
 	// ProtocolLib
-	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.8.0") {
+	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "5.1.0") {
 		transitive = false
 	}
 
-	shadow (group: 'com.github.Sitrica', name: 'GlowingAPI', version: '1.0.1') {
-		transitive = false
-	}
+	// Adventure API serializer to text components for Bukkit.
+	shadow group: 'net.kyori', name: 'adventure-text-serializer-bungeecord', version: '4.3.0'
 
-	// AnvilGUI (WesJD has no idea what they're doing!)
-	//shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.5.3-20220729.205419-10')
-	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.6.6-SNAPSHOT')
-	//shadow 'com.github.WesJD:anvilgui:master-SNAPSHOT'
+	// AnvilGUI
+	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.9.0-SNAPSHOT')
 
 	// bStats
 	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2'
@@ -74,6 +85,7 @@ dependencies {
 	shadow (group: 'org.json', name: 'json', version: '20220924')
 
 	shadow fileTree(dir: 'libraries', include: '*.jar')
+	shadow project(':GlowingAPI')
 
 }
 
@@ -88,8 +100,7 @@ processResources {
 shadowJar {
 	configurations = [project.configurations.shadow]
 	archiveVersion = project.property("version")
-	archiveBaseName = project.name
-	classifier = ''
+	minimize()
 	relocate 'eu.endercentral.crazy_advancements', 'me.limeglass.skacket.crazyadvancements'
 	relocate 'org.bstats', 'me.limeglass.skacket.bstats'
 	dependencies {
@@ -99,4 +110,5 @@ shadowJar {
 		include(dependency('org.bstats:bstats-bukkit'))
 		include(dependency('org.bstats:bstats-base'))
 	}
+
 }

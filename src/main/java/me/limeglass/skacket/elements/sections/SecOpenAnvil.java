@@ -2,6 +2,7 @@ package me.limeglass.skacket.elements.sections;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -14,7 +15,9 @@ import com.google.common.collect.Lists;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.config.SectionNode;
+import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.Section;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -25,14 +28,23 @@ import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
 import me.limeglass.skacket.Skacket;
 import me.limeglass.skacket.events.AnvilGUIEvent;
-import me.limeglass.skacket.events.AnvilGUIEvent.Click;
+import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.wesjd.anvilgui.AnvilGUI;
-import net.wesjd.anvilgui.AnvilGUI.Response;
 
 @Name("Open Anvil")
+@Description({
+	"Opens a custom anvil inventory that cannot have the items taken from it.",
+	"Inside the section will be the event called when the player clicks either the left, right or output item."
+})
+@Since("2.0.6")
 public class SecOpenAnvil extends Section {
 
+	@Nullable
+	private static BungeeComponentSerializer serializer;
+
 	static {
+		if (Skript.classExists("net.kyori.adventure.text.Component"))
+			serializer = BungeeComponentSerializer.get();
 		Skript.registerSection(SecOpenAnvil.class, "open [an] anvil [gui] (named|with title) %string% to %players% with left item %itemstack% [and [right] item %-itemstack%]",
 				"open [an] anvil [gui] (named|with title) %string% to %players% with [items] %itemstacks%",
 				"open [an] anvil [gui] (named|with title) %string% to %players% with left item %itemstack% [and [right] item %-itemstack%] [[and] exclud(e|ing) left and right clicks]");
@@ -82,36 +94,23 @@ public class SecOpenAnvil extends Section {
 			debug(event, true);
 			return actualNext;
 		}
-		AnvilGUI.Builder builder = new AnvilGUI.Builder().title(title.getSingle(event)).plugin(Skacket.getInstance());
+		AnvilGUI.Builder builder = new AnvilGUI.Builder()
+				.title(title.getSingle(event))
+				.plugin(Skacket.getInstance());
 		if (items.size() >= 1)
 			builder.itemLeft(items.get(0));
 		if (items.size() >= 2)
 			builder.itemRight(items.get(1));
 		Object localVariables = Variables.copyLocalVariables(event);
-		builder.onComplete((player, text) -> {
-			AnvilGUIEvent anvil = new AnvilGUIEvent(player, text, Click.COMPLETE);
-			if (localVariables != null)
-				Variables.setLocalVariables(anvil, localVariables);
-			Bukkit.getPluginManager().callEvent(anvil);
-			trigger.execute(anvil);
-			return Response.close();
-		});
-		builder.onLeftInputClick((player) -> {
-			AnvilGUIEvent anvil = new AnvilGUIEvent(player, null, Click.LEFT);
+		builder.onClick((slot, stateSnapshot) -> { // Either use sync or async variant, not both
+			AnvilGUIEvent anvil = new AnvilGUIEvent(slot, stateSnapshot);
 			if (localVariables != null)
 				Variables.setLocalVariables(anvil, localVariables);
 			Bukkit.getPluginManager().callEvent(anvil);
 			if (!excludes)
 				trigger.execute(anvil);
-		});
-		builder.onRightInputClick((player) -> {
-			AnvilGUIEvent anvil = new AnvilGUIEvent(player, null, Click.RIGHT);
-			if (localVariables != null)
-				Variables.setLocalVariables(anvil, localVariables);
-			Bukkit.getPluginManager().callEvent(anvil);
-			if (!excludes)
-				trigger.execute(anvil);
-		});
+			return Collections.emptyList();
+	    });
 		for (Player player : players.getArray(event))
 			builder.open(player);
 		debug(event, true);

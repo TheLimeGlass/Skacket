@@ -1,6 +1,5 @@
 package me.limeglass.skacket.elements.effects;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -67,7 +66,7 @@ public class EffArmourChange extends Effect {
 			receivers.addAll(Sets.newHashSet(players.getArray(event)));
 		List<ItemStack> items = this.items.stream(event).collect(Collectors.toList());
 		List<ItemSlot> slots = this.slots.stream(event).collect(Collectors.toList());
-		if (MinecraftVersion.atOrAbove(MinecraftVersion.BEE_UPDATE)) {
+		if (MinecraftVersion.BEE_UPDATE.atOrAbove()) {
 			List<Pair<ItemSlot, ItemStack>> pairs = IntStream.range(0, Math.min(slots.size(), items.size()))
 				    .boxed()
 				    .collect(Collectors.toMap(slots::get, items::get))
@@ -78,13 +77,8 @@ public class EffArmourChange extends Effect {
 				PacketContainer container = new PacketContainer(PacketType.Play.Server.ENTITY_EQUIPMENT);
 				container.getIntegers().write(0, entity.getEntityId());
 				container.getSlotStackPairLists().write(0, pairs);
-				for (Player receiver : receivers) {
-					try {
-						ProtocolLibrary.getProtocolManager().sendServerPacket(receiver, container);
-					} catch (InvocationTargetException e) {
-						throw new RuntimeException("Cannot send packet.", e);
-					}
-				}
+				for (Player receiver : receivers)
+					ProtocolLibrary.getProtocolManager().sendServerPacket(receiver, container);
 			}
 		} else {
 			if (slots.size() <= 0 || items.size() <= 0)
