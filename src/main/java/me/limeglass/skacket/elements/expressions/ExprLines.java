@@ -16,7 +16,7 @@ import ch.njol.util.Kleenean;
 public class ExprLines extends SimpleExpression<String> {
 
 	static {
-		Skript.registerExpression(ExprLines.class, String.class, ExpressionType.SIMPLE, "[the] lines");
+		Skript.registerExpression(ExprLines.class, String.class, ExpressionType.SIMPLE, "[the] [sign] lines");
 	}
 
 	@Override

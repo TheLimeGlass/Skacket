@@ -108,8 +108,11 @@ public class SecOpenAnvil extends Section {
 			if (localVariables != null)
 				Variables.setLocalVariables(anvil, localVariables);
 			Bukkit.getPluginManager().callEvent(anvil);
-			if (!excludes)
+			if (!excludes) {
 				trigger.execute(anvil);
+			} else if (AnvilGUI.Slot.OUTPUT == slot) {
+				trigger.execute(anvil);
+			}
 			return Collections.emptyList();
 	    });
 		for (Player player : players.getArray(event))

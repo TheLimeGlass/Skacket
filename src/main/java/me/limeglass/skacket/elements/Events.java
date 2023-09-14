@@ -51,6 +51,13 @@ public class Events {
 				return event.getText();
 			}
 		}, 0);
+		EventValues.registerEventValue(AnvilGUIEvent.class, Player.class, new Getter<Player, AnvilGUIEvent>() {
+			@Override
+			@Nullable
+			public Player get(AnvilGUIEvent event) {
+				return event.getPlayer();
+			}
+		}, 0);
 		EventValues.registerEventValue(AnvilGUIEvent.class, Number.class, new Getter<Number, AnvilGUIEvent>() {
 			@Override
 			@Nullable

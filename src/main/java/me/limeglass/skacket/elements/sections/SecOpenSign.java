@@ -26,15 +26,18 @@ public class SecOpenSign extends EffectSection {
 	}
 
 	private Expression<Player> players;
+
+	@Nullable
 	private Expression<String> lines;
 
 	@Nullable
 	private TriggerItem actualNext;
+
 	@Nullable
 	private Trigger trigger;
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public boolean init(Expression<?>[] expressions, int matchedPattern, Kleenean isDelayed, ParseResult parseResult, @Nullable SectionNode sectionNode, @Nullable List<TriggerItem> triggerItems) {
 		players = (Expression<Player>) expressions[0];
 		lines = (Expression<String>) expressions[1];
