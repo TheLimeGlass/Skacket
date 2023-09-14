@@ -25,7 +25,7 @@ public class ExprSoundSeed extends EventValueExpression<Long> {
 	}
 
 	public ExprSoundSeed() {
-		super(Long.class);
+		super(Long.class, true);
 	}
 
 	@Nullable
@@ -39,7 +39,6 @@ public class ExprSoundSeed extends EventValueExpression<Long> {
 		seed = new EventValueExpression<>(Long.class);
 		if (seed.init())
 			return new Class[] {Number.class};
-		seed = null;
 		return null;
 	}
 

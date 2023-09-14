@@ -103,6 +103,8 @@ public class Events {
 		EventValues.registerEventValue(NamedSoundEvent.class, String.class, new Getter<String, NamedSoundEvent>() {
 			@Nullable
 			public String get(NamedSoundEvent event) {
+				if (event.getSound() == null)
+					return null;
 				return event.getSound().name().replaceAll("_", " ").toLowerCase(Locale.ENGLISH);
 			}
 		}, 0);
