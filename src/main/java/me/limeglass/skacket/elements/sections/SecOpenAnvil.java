@@ -57,11 +57,12 @@ public class SecOpenAnvil extends Section {
 
 	@Nullable
 	private TriggerItem actualNext;
+
 	@Nullable
 	private Trigger trigger;
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public boolean init(Expression<?>[] expressions, int matchedPattern, Kleenean isDelayed, ParseResult parseResult, SectionNode sectionNode, List<TriggerItem> triggerItems) {
 		title = (Expression<String>) expressions[0];
 		players = (Expression<Player>) expressions[1];

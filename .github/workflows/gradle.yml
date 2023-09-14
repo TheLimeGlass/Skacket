@@ -4,31 +4,36 @@
 name: Java CI with Gradle
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    push:
+        branches:
+            - master
+    pull_request:
 
 jobs:
-  build:
+    build:
+        if: "! contains(toJSON(github.event.commits.*.message), '[ci skip]')"
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
-      with:
-        java-version: '17'
-        distribution: 'adopt'
-        cache: gradle
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew clean shadow
-    - name: Upload Nightly Build
-      uses: actions/upload-artifact@v2
-      if: success()
-      with:
-        name: nightly-jar-builds
-        path: build/libs/*.jar
+        steps:
+            - name: checkout repository
+              uses: actions/checkout@v2
+              with:
+                  submodules: recursive
+            - name: validate gradle wrapper
+              uses: gradle/wrapper-validation-action@v1
+            - name: Set up JDK 17
+              uses: actions/setup-java@v2
+              with:
+                  java-version: '17'
+                  distribution: 'microsoft'
+                  cache: gradle
+            - name: Grant execute permission for gradlew
+              run: chmod +x gradlew
+            - name: Build with Gradle
+              run: ./gradlew clean shadow
+            - name: Upload Nightly Build
+              uses: actions/upload-artifact@v2
+              if: success()
+              with:
+                name: nightly-jar-builds
+                path: build/libs/*.jar
