@@ -82,7 +82,7 @@ dependencies {
 	// bStats
 	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2'
 
-	shadow (group: 'org.json', name: 'json', version: '20220924')
+	shadow (group: 'org.json', name: 'json', version: '20230618')
 
 	shadow fileTree(dir: 'libraries', include: '*.jar')
 	shadow project(':GlowingAPI')
