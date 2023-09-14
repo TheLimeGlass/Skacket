@@ -49,7 +49,7 @@ public class PacketListeners {
 				try {
 					category = SoundCategory.valueOf(wrapper.getSoundCategory().name());
 				} catch (Exception e) {}
-				NamedSoundEvent soundEvent = new NamedSoundEvent(player, wrapper.getSoundEffect(), category, location, wrapper.getVolume(), wrapper.getPitch());
+				NamedSoundEvent soundEvent = new NamedSoundEvent(player, wrapper.getSoundEffect().orElse(null), category, location, wrapper.getVolume(), wrapper.getPitch(), wrapper.getSeed());
 				Bukkit.getPluginManager().callEvent(soundEvent);
 				if (soundEvent.isCancelled()) {
 					event.setCancelled(true);
@@ -57,6 +57,7 @@ public class PacketListeners {
 				}
 				wrapper.setPitch(soundEvent.getPitch());
 				wrapper.setVolume(soundEvent.getVolume());
+				wrapper.setSeed(soundEvent.getSeed());
 				wrapper.setSoundCategory(com.comphenix.protocol.wrappers.EnumWrappers.SoundCategory.valueOf(soundEvent.getSoundCategory().name()));
 			}
 		});

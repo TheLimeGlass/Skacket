@@ -88,10 +88,16 @@ public class Events {
 				return event.getLocation();
 			}
 		}, 0);
-		EventValues.registerEventValue(NamedSoundEvent.class, Number.class, new Getter<Number, NamedSoundEvent>() {
+		EventValues.registerEventValue(NamedSoundEvent.class, Float.class, new Getter<Float, NamedSoundEvent>() {
 			@Nullable
-			public Number get(NamedSoundEvent event) {
+			public Float get(NamedSoundEvent event) {
 				return event.getPitch();
+			}
+		}, 0);
+		EventValues.registerEventValue(NamedSoundEvent.class, Long.class, new Getter<Long, NamedSoundEvent>() {
+			@Nullable
+			public Long get(NamedSoundEvent event) {
+				return event.getSeed();
 			}
 		}, 0);
 		EventValues.registerEventValue(NamedSoundEvent.class, String.class, new Getter<String, NamedSoundEvent>() {

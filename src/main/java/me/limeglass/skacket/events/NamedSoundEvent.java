@@ -18,8 +18,9 @@ public class NamedSoundEvent extends Event implements Cancellable {
 	private float volume;
 	private Sound sound;
 	private float pitch;
+	private long seed;
 
-	public NamedSoundEvent(Player player, Sound sound, SoundCategory category, Location location, float volume, float pitch) {
+	public NamedSoundEvent(Player player, Sound sound, SoundCategory category, Location location, float volume, float pitch, long seed) {
 		super(false);
 		this.category = category;
 		this.location = location;
@@ -27,6 +28,7 @@ public class NamedSoundEvent extends Event implements Cancellable {
 		this.player = player;
 		this.sound = sound;
 		this.pitch = pitch;
+		this.setSeed(seed);
 	}
 
 	public HandlerList getHandlers() {
@@ -83,6 +85,14 @@ public class NamedSoundEvent extends Event implements Cancellable {
 
 	public void setCancelled(boolean cancelled) {
 		this.cancelled = cancelled;
+	}
+
+	public long getSeed() {
+		return seed;
+	}
+
+	public void setSeed(long seed) {
+		this.seed = seed;
 	}
 
 }

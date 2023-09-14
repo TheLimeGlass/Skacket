@@ -16,15 +16,18 @@ import ch.njol.skript.lang.ExpressionType;
 import me.limeglass.skacket.events.NamedSoundEvent;
 
 @Name("Event Sound")
-@Description("Get the string version of the sound that was played. Can be set to a string of a Sound.")
+@Description({
+	"Get the string version of the sound that was played. Can be set to a string of a Sound.",
+	"Can be not present. Mojang made it that way."
+})
 @Since("1.0.13")
-public class ExprSoundLocation extends EventValueExpression<String> {
+public class ExprSound extends EventValueExpression<String> {
 
 	static {
-		Skript.registerExpression(ExprSoundLocation.class, String.class, ExpressionType.SIMPLE, "[the] sound");
+		Skript.registerExpression(ExprSound.class, String.class, ExpressionType.SIMPLE, "[the] sound");
 	}
 
-	public ExprSoundLocation() {
+	public ExprSound() {
 		super(String.class);
 	}
 

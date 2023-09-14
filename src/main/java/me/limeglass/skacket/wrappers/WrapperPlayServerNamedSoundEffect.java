@@ -1,5 +1,7 @@
 package me.limeglass.skacket.wrappers;
 
+import java.util.Optional;
+
 import org.bukkit.Sound;
 
 import com.comphenix.protocol.PacketType;
@@ -19,8 +21,8 @@ public class WrapperPlayServerNamedSoundEffect extends AbstractPacket {
 		super(packet, TYPE);
 	}
 
-	public Sound getSoundEffect() {
-		return handle.getSoundEffects().read(0);
+	public Optional<Sound> getSoundEffect() {
+		return handle.getSoundEffects().optionRead(0);
 	}
 
 	public void setSoundEffect(Sound value) {
@@ -33,6 +35,14 @@ public class WrapperPlayServerNamedSoundEffect extends AbstractPacket {
 
 	public void setSoundCategory(SoundCategory value) {
 		handle.getSoundCategories().write(0, value);
+	}
+
+	public long getSeed() {
+		return handle.getLongs().read(0);
+	}
+
+	public void setSeed(long value) {
+		handle.getLongs().write(0, value);
 	}
 
 	/**
