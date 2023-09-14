@@ -10,6 +10,9 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.config.SectionNode;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.EffectSection;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -19,6 +22,9 @@ import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
 import me.limeglass.skacket.Skacket;
 
+@Name("Open Sign GUI")
+@Description("Opens a sign GUI to a player. The client does not like colour unfortunately for client side signs.")
+@Since("1.0.13")
 public class SecOpenSign extends EffectSection {
 
 	static {
