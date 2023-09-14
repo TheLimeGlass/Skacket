@@ -1,5 +1,9 @@
 package me.limeglass.skacket.elements;
 
+import java.util.Locale;
+
+import org.bukkit.Location;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.eclipse.jdt.annotation.Nullable;
@@ -10,6 +14,7 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import me.limeglass.skacket.events.AnvilGUIEvent;
 import me.limeglass.skacket.events.AnvilGUIEvent.Click;
+import me.limeglass.skacket.events.NamedSoundEvent;
 import me.limeglass.skacket.events.ServerSignChangeEvent;
 
 public class Events {
@@ -58,6 +63,40 @@ public class Events {
 			@Nullable
 			public Click get(AnvilGUIEvent event) {
 				return event.getClickType();
+			}
+		}, 0);
+
+		Skript.registerEvent("named sound", SimpleEvent.class, NamedSoundEvent.class, "[named] sound [(trigger|play)]", "player hear[ing] sound[s]")
+				.description("Called when a sound is to be played to the client.")
+				.since("1.0.13");
+		EventValues.registerEventValue(NamedSoundEvent.class, Player.class, new Getter<Player, NamedSoundEvent>() {
+			@Nullable
+			public Player get(NamedSoundEvent event) {
+				return event.getPlayer();
+			}
+		}, 0);
+		EventValues.registerEventValue(NamedSoundEvent.class, Location.class, new Getter<Location, NamedSoundEvent>() {
+			@Nullable
+			public Location get(NamedSoundEvent event) {
+				return event.getLocation();
+			}
+		}, 0);
+		EventValues.registerEventValue(NamedSoundEvent.class, Number.class, new Getter<Number, NamedSoundEvent>() {
+			@Nullable
+			public Number get(NamedSoundEvent event) {
+				return event.getPitch();
+			}
+		}, 0);
+		EventValues.registerEventValue(NamedSoundEvent.class, String.class, new Getter<String, NamedSoundEvent>() {
+			@Nullable
+			public String get(NamedSoundEvent event) {
+				return event.getSound().name().replaceAll("_", " ").toLowerCase(Locale.ENGLISH);
+			}
+		}, 0);
+		EventValues.registerEventValue(NamedSoundEvent.class, SoundCategory.class, new Getter<SoundCategory, NamedSoundEvent>() {
+			@Nullable
+			public SoundCategory get(NamedSoundEvent event) {
+				return event.getSoundCategory();
 			}
 		}, 0);
 	}

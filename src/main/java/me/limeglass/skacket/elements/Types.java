@@ -2,7 +2,6 @@ package me.limeglass.skacket.elements;
 
 import java.util.Locale;
 
-import org.bukkit.Sound;
 import org.eclipse.jdt.annotation.Nullable;
 
 import com.comphenix.protocol.wrappers.EnumWrappers.ItemSlot;
@@ -175,39 +174,6 @@ public class Types {
 
 				})
 				.serializer(new EnumSerializer<>(Click.class)));
-		if (Classes.getExactClassInfo(Sound.class) == null) {
-			EnumUtils<Sound> sounds = new EnumUtils<>(Sound.class, "sound");
-			Classes.registerClass(new ClassInfo<>(Sound.class, "sound")
-					.user("sounds?")
-					.name("Sound")
-					.usage(sounds.getAllNames())
-					.defaultExpression(new EventValueExpression<>(Sound.class))
-					.parser(new Parser<Sound>() {
-
-						@Override
-						@Nullable
-						public Sound parse(String input, ParseContext context) {
-							return sounds.parse(input);
-						}
-
-						@Override
-						public boolean canParse(ParseContext context) {
-							return true;
-						}
-
-						@Override
-						public String toString(Sound sound, int flags) {
-							return sounds.toString(sound, flags);
-						}
-
-						@Override
-						public String toVariableNameString(Sound sound) {
-							return sound.name().toLowerCase(Locale.ENGLISH);
-						}
-
-					})
-					.serializer(new EnumSerializer<>(Sound.class)));
-		}
 		EnumUtils<AdvancementFrame> frames = new EnumUtils<>(AdvancementFrame.class, "advancementframe");
 		Classes.registerClass(new ClassInfo<>(AdvancementFrame.class, "advancementframe")
 				.user("advancementframes?")

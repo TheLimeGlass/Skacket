@@ -1,63 +1,57 @@
 package me.limeglass.skacket.elements.expressions;
 
+import java.util.Locale;
+
+import org.bukkit.Sound;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer.ChangeMode;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
 import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.ExpressionType;
 import me.limeglass.skacket.events.NamedSoundEvent;
 
-public class ExprSoundLocation extends EventValueExpression<Number> {
+@Name("Event Sound")
+@Description("Get the string version of the sound that was played. Can be set to a string of a Sound.")
+@Since("1.0.13")
+public class ExprSoundLocation extends EventValueExpression<String> {
 
 	static {
-		Skript.registerExpression(ExprSoundLocation.class, Number.class, ExpressionType.SIMPLE, "[the] sound location");
+		Skript.registerExpression(ExprSoundLocation.class, String.class, ExpressionType.SIMPLE, "[the] sound");
 	}
 
 	public ExprSoundLocation() {
-		super(Number.class);
+		super(String.class);
 	}
 
 	@Nullable
-	private EventValueExpression<Number> volume;
+	private EventValueExpression<String> sound;
 
 	@Override
 	@Nullable
 	public Class<?>[] acceptChange(ChangeMode mode) {
-		if (mode == ChangeMode.RESET || mode == ChangeMode.DELETE || mode == ChangeMode.REMOVE_ALL)
+		if (mode != ChangeMode.SET)
 			return null;
-		volume = new EventValueExpression<>(Number.class);
-		if (volume.init())
-			return new Class[] {Number.class};
-		volume = null;
+		sound = new EventValueExpression<>(String.class);
+		if (sound.init())
+			return new Class[] {String.class};
 		return null;
 	}
 
 	@Override
-	public void change(Event e, @Nullable Object[] delta, ChangeMode mode) {
-		Number volume = delta == null ? null : (Number) delta[0];
-		Number existing = this.volume != null ? this.volume.getSingle(e) : null;
-		if (existing == null)
+	public void change(Event event, @Nullable Object[] delta, ChangeMode mode) {
+		String sound = delta == null ? null : (String) delta[0];
+		if (sound == null)
 			return;
-		float f = volume.floatValue();
-		float ex = existing.floatValue();
-		NamedSoundEvent event = (NamedSoundEvent) e;
-		switch (mode) {
-			case SET:
-				event.setVolume(f);
-				break;
-			case ADD:
-				event.setVolume(ex + f);
-				break;
-			case REMOVE:
-				event.setVolume(ex - f);
-				break;
-			case REMOVE_ALL:
-			case DELETE:
-			case RESET:
-				assert false;
-		}
+		try {
+			Sound enumSound = Sound.valueOf(sound.toUpperCase(Locale.ENGLISH).replaceAll(" ", "_"));
+			NamedSoundEvent soundEvent = (NamedSoundEvent) event;
+			soundEvent.setSound(enumSound);
+		} catch (Exception ignored) {}
 	}
 
 }

@@ -82,8 +82,6 @@ dependencies {
 	// bStats
 	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2'
 
-	shadow (group: 'org.json', name: 'json', version: '20220924')
-
 	shadow fileTree(dir: 'libraries', include: '*.jar')
 	shadow project(':GlowingAPI')
 
@@ -100,7 +98,7 @@ processResources {
 shadowJar {
 	configurations = [project.configurations.shadow]
 	archiveVersion = project.property("version")
-	minimize()
+	archiveFileName = 'Skacket-' + project.property("version") + '.jar'
 	relocate 'eu.endercentral.crazy_advancements', 'me.limeglass.skacket.crazyadvancements'
 	relocate 'org.bstats', 'me.limeglass.skacket.bstats'
 	dependencies {
@@ -109,6 +107,8 @@ shadowJar {
 		exclude(dependency('io.netty:'))
 		include(dependency('org.bstats:bstats-bukkit'))
 		include(dependency('org.bstats:bstats-base'))
+		include(project(':GlowingAPI'))
+		include(dependency('net.wesjd:anvilgui'))
+		include(dependency('net.kyori:adventure-text-serializer-bungeecord'))
 	}
-
 }

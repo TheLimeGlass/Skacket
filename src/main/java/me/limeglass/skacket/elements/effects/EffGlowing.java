@@ -1,6 +1,7 @@
 package me.limeglass.skacket.elements.effects;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
@@ -49,10 +50,12 @@ public class EffGlowing extends Effect {
 			send.addAll(Bukkit.getOnlinePlayers());
 		else
 			send.addAll(Sets.newHashSet(players.getArray(event)));
-		boolean setting = this.setting.getSingle(event);
+		Optional<Boolean> setting = this.setting.getOptionalSingle(event);
+		if (!setting.isPresent())
+			return;
 		GlowingAPI instance = Skacket.getInstance().getGlowingAPI();
 		for (LivingEntity entity : entities.getArray(event)) {
-			if (setting) {
+			if (setting.get()) {
 				instance.setGlowing(entity, send.toArray(new Player[send.size()]));
 			} else {
 				instance.stopGlowing(entity, send.toArray(new Player[send.size()]));
