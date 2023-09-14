@@ -36,7 +36,7 @@ import net.wesjd.anvilgui.AnvilGUI;
 	"Opens a custom anvil inventory that cannot have the items taken from it.",
 	"Inside the section will be the event called when the player clicks either the left, right or output item."
 })
-@Since("2.0.6")
+@Since("1.0.13")
 public class SecOpenAnvil extends Section {
 
 	@Nullable

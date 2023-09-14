@@ -16,7 +16,7 @@ import me.limeglass.skacket.events.AnvilGUIEvent.Click;
 
 @Name("Anvil Click")
 @Description("Check the click type of the anvil click event.")
-@Since("2.0.6")
+@Since("1.0.13")
 public class CondAnvilClick extends Condition {
 
 	static {
