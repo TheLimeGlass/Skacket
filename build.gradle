@@ -77,7 +77,7 @@ dependencies {
 	shadow group: 'net.kyori', name: 'adventure-text-serializer-bungeecord', version: '4.3.0'
 
 	// AnvilGUI
-	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.9.0-SNAPSHOT')
+	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.9.1-SNAPSHOT')
 
 	// bStats
 	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2'
