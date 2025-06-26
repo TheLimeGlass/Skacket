@@ -3,13 +3,13 @@ package me.limeglass.skacket;
 import java.io.File;
 import java.io.IOException;
 
+import me.limeglass.skacket.managers.GlowingAPI;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import com.sitrica.glowing.GlowingAPI;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;

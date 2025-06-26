@@ -1,20 +1,18 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-	id 'com.github.johnrengelman.shadow' version '8.1.1'
-	id 'eclipse'
+	id 'com.gradleup.shadow' version '9.0.0-beta13'
 	id 'java'
 }
 
-def latestJava = 17
-def oldestJava = 8
+def latestJava = 21
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(latestJava))
 }
 
 tasks.withType(JavaCompile).configureEach {
-	options.compilerArgs += ['-source', '' + oldestJava, '-target', '' + oldestJava]
+	options.compilerArgs += ['-source', '' + latestJava, '-target', '' + latestJava]
 }
 
 compileJava.options.encoding = 'UTF-8'
@@ -61,15 +59,15 @@ dependencies {
 	implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.2.700')
 
 	// Spigot/Bukkit
-	implementation (group: 'io.papermc.paper', name: 'paper-api', version: '1.20.2-R0.1-SNAPSHOT')
+	implementation (group: 'io.papermc.paper', name: 'paper-api', version: '1.21.5-R0.1-SNAPSHOT')
 
 	// Skript
-	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.7.0') {
+	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.11.2') {
 		transitive = false
 	}
 
 	// ProtocolLib
-	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "5.1.0") {
+	implementation (group: "com.comphenix.protocol", name: "ProtocolLib", version: "5.3.0") {
 		transitive = false
 	}
 
@@ -83,7 +81,6 @@ dependencies {
 	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2'
 
 	shadow fileTree(dir: 'libraries', include: '*.jar')
-	shadow project(':GlowingAPI')
 
 }
 
@@ -93,6 +90,10 @@ processResources {
         include '**/*'
         into 'lang/'
     }
+}
+
+build {
+	dependsOn shadowJar
 }
 
 shadowJar {
@@ -107,7 +108,6 @@ shadowJar {
 		exclude(dependency('io.netty:'))
 		include(dependency('org.bstats:bstats-bukkit'))
 		include(dependency('org.bstats:bstats-base'))
-		include(project(':GlowingAPI'))
 		include(dependency('net.wesjd:anvilgui'))
 		include(dependency('net.kyori:adventure-text-serializer-bungeecord'))
 	}

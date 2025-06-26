@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import me.limeglass.skacket.managers.GlowingAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -11,7 +12,6 @@ import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
 import com.google.common.collect.Sets;
-import com.sitrica.glowing.GlowingAPI;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
