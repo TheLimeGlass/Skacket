@@ -1,9 +1,12 @@
 package me.limeglass.skacket.listeners;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import me.limeglass.skacket.wrappers.WrapperPlayClientPlayerInput;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -66,23 +69,25 @@ public class PacketListeners {
 		instance.getProtocolManager().addPacketListener(new PacketAdapter(instance, PacketType.Play.Client.STEER_VEHICLE) {
 			@Override
 			public void onPacketReceiving(PacketEvent event) {
-				PacketContainer packet = event.getPacket();
-				Set<Movement> movements = new HashSet<>();
-				StructureModifier<Float> floats = packet.getFloat();
-				float sideways = floats.read(0);
-				if (sideways != 0)
-					movements.add(sideways > 0 ? Movement.LEFT : Movement.RIGHT);
-				float forwards = floats.read(1);
-				if (forwards != 0)
-					movements.add(forwards > 0 ? Movement.FORWARDS : Movement.BACKWARDS);
-				StructureModifier<Boolean> booleans = packet.getBooleans();
-				if (booleans.read(0))
+				WrapperPlayClientPlayerInput wrapper = new WrapperPlayClientPlayerInput(event.getPacket());
+				List<Movement> movements = new ArrayList<>();
+				if (wrapper.getSideways() > 0)
+					movements.add(Movement.LEFT);
+				if (wrapper.getSideways() < 0)
+					movements.add(Movement.RIGHT);
+				if (wrapper.getForward() > 0)
+					movements.add(Movement.FORWARDS);
+				if (wrapper.getForward() < 0)
+					movements.add(Movement.BACKWARDS);
+				if (wrapper.isJump())
 					movements.add(Movement.JUMP);
-				if (booleans.read(1))
-					movements.add(Movement.UNMOUNT);
+				if (wrapper.isSneak())
+					movements.add(Movement.SNEAK);
+				if (wrapper.isSprint())
+					movements.add(Movement.SPRINT);
 				if (movements.isEmpty())
 					return;
-				SteerVehicleEvent steer = new SteerVehicleEvent(event.getPlayer(), movements.toArray(new Movement[movements.size()]));
+				SteerVehicleEvent steer = new SteerVehicleEvent(event.getPlayer(), movements.toArray(Movement[]::new));
 				Bukkit.getPluginManager().callEvent(steer);
 				if (steer.isCancelled())
 					event.setCancelled(true);

@@ -18,7 +18,8 @@ public class SteerVehicleEvent extends Event implements Cancellable {
 		FORWARDS,
 		BACKWARDS,
 		JUMP,
-		UNMOUNT;
+		SNEAK,
+		SPRINT;
 	}
 
 	public SteerVehicleEvent(Player player, Movement... movements) {
