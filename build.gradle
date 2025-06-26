@@ -72,7 +72,7 @@ dependencies {
 	}
 
 	// Adventure API serializer to text components for Bukkit.
-	shadow group: 'net.kyori', name: 'adventure-text-serializer-bungeecord', version: '4.3.2'
+	shadow group: 'net.kyori', name: 'adventure-text-serializer-bungeecord', version: '4.4.0'
 
 	// AnvilGUI
 	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.10.6-SNAPSHOT')
