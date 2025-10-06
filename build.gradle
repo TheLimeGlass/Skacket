@@ -59,7 +59,7 @@ dependencies {
 	implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '2.3.100')
 
 	// Spigot/Bukkit
-	implementation (group: 'io.papermc.paper', name: 'paper-api', version: '1.21.9-pre4-R0.1-SNAPSHOT')
+	implementation (group: 'io.papermc.paper', name: 'paper-api', version: '1.21.9-R0.1-SNAPSHOT')
 
 	// Skript
 	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.11.2') {
