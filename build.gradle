@@ -62,7 +62,7 @@ dependencies {
 	implementation (group: 'io.papermc.paper', name: 'paper-api', version: '1.21.11-pre3-R0.1-SNAPSHOT')
 
 	// Skript
-	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.11.2') {
+	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.13.2') {
 		transitive = false
 	}
 
