@@ -78,7 +78,7 @@ dependencies {
 	shadow (group: 'net.wesjd', name: 'anvilgui', version: '1.10.11-SNAPSHOT')
 
 	// bStats
-	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.1.0'
+	shadow group: 'org.bstats', name: 'bstats-bukkit', version: '3.2.1'
 
 	shadow fileTree(dir: 'libraries', include: '*.jar')
 
